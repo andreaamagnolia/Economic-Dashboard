@@ -154,6 +154,23 @@ button:focus-visible,a:focus-visible{outline:3px solid #A5B4FC;outline-offset:2p
 </div>
 </div>
 
+<article v-if="V.ai" aria-labelledby="ai-head" :lang="V.ai.lang" style="position: relative; overflow: hidden; border-radius: 20px; padding: 20px 22px; display: flex; flex-direction: column; gap: 12px; border: 2px solid transparent; background: linear-gradient(#0E1442, #0E1442) padding-box, linear-gradient(135deg, #60A5FA, #A78BFA, #22D3EE) border-box">
+<div style="display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 8px">
+<span style="display: flex; flex-wrap: wrap; align-items: center; gap: 8px"><span lang="en" :style="V.tInsight.tagStyle">AI Insight</span><span lang="en" style="font-size: 12px; color: #B4C0DA">{{ V.ai.scope }}</span><span v-if="V.ai.isNew" lang="en" :style="V.live.newStyle">New</span></span>
+<span lang="en" style="font-size: 12px; color: #8E9BBF">Updated <time :datetime="V.ai.iso" :title="V.ai.when">{{ V.ai.ago }}</time> · from {{ V.ai.count }} stories</span>
+</div>
+<h3 id="ai-head" style="margin: 0; font-family: 'Sora', sans-serif; font-size: 22px; line-height: 1.25; font-weight: 800">{{ V.ai.headline }}</h3>
+<p style="margin: 0; font-size: 15px; line-height: 1.6; color: #E0E7FF">{{ V.ai.summary }}</p>
+<ul style="margin: 0; padding-left: 20px; display: flex; flex-direction: column; gap: 8px; font-size: 14px; line-height: 1.55; color: #E2E8F0">
+<div style="display:contents" v-for="p in V.ai.points"><li>{{ p.text }}<span style="display:contents" v-for="c in p.cites"> <a :href="c.url" target="_blank" rel="noopener" :title="c.title" :aria-label="c.label" style="display: inline-flex; align-items: center; justify-content: center; min-width: 22px; height: 20px; padding: 0 5px; border-radius: 6px; font-size: 11px; font-weight: 800; text-decoration: none; color: #DBEAFE; background: rgba(96,165,250,0.18); border: 1px solid rgba(147,197,253,0.4); vertical-align: 1px">{{ c.n }}</a></span></li></div>
+</ul>
+<div style="display: flex; flex-wrap: wrap; gap: 12px">
+<div v-if="V.ai.why" style="flex: 1 1 280px; min-width: 0; padding: 12px 14px; border-radius: 14px; background: rgba(96,165,250,0.1); border: 1px solid rgba(147,197,253,0.25); font-size: 14px; line-height: 1.55; color: #DBEAFE"><strong style="display: block; margin-bottom: 4px; font-size: 12px; letter-spacing: 0.06em; text-transform: uppercase; color: #93C5FD">{{ V.ai.whyLabel }}</strong>{{ V.ai.why }}</div>
+<div v-if="V.ai.hasWatch" style="flex: 1 1 280px; min-width: 0; padding: 12px 14px; border-radius: 14px; background: rgba(45,212,191,0.08); border: 1px solid rgba(94,234,212,0.25); font-size: 14px; line-height: 1.55; color: #CCFBF1"><strong style="display: block; margin-bottom: 4px; font-size: 12px; letter-spacing: 0.06em; text-transform: uppercase; color: #5EEAD4">{{ V.ai.watchLabel }}</strong><ul style="margin: 0; padding-left: 18px"><div style="display:contents" v-for="w in V.ai.watch"><li>{{ w.text }}</li></div></ul></div>
+</div>
+<span lang="en" style="font-size: 12px; line-height: 1.5; color: #8E9BBF">Written by AI ({{ V.ai.model }}) from the headlines above. It can be wrong or miss context: open the numbered sources before relying on it.</span>
+</article>
+
 <p v-if="V.live.showEmpty" style="margin: 0; padding: 22px; border-radius: 18px; background: rgba(255,255,255,0.05); border: 1px dashed rgba(255,255,255,0.22); font-size: 15px; line-height: 1.55; color: #CBD5E1">{{ V.live.emptyText }}</p>
 
 <div v-if="V.live.lead" style="display: flex; flex-wrap: wrap; gap: 14px">
@@ -736,6 +753,7 @@ button:focus-visible,a:focus-visible{outline:3px solid #A5B4FC;outline-offset:2p
   // Live news lives outside the reactive store (it can be hundreds of rows);
   // bumping store.s.newsVer tells the view to re-render.
   var NEWS = { items: [], status: 'idle', updated: null, fresh: {} };
+  var INSIGHTS = { byCat: {}, fresh: {} };   // newest AI insight per category
   class DCLogic {
     constructor(props) { this.props = props || {}; }
     get state() { return store.s; }
@@ -868,6 +886,23 @@ class Component extends DCLogic {
       hasMore: nReady && nList.length > 5 + s.newsLimit,
       more: () => this.setState({ newsLimit: s.newsLimit + 12 })
     };
+
+    // ---------- AI insight for the selected topic ----------
+    const ins = INSIGHTS.byCat[s.newsCat];
+    const ai = ins ? {
+      lang: ins.lang || 'id', headline: ins.headline, summary: ins.summary,
+      scope: s.newsCat === 'semua' ? 'Today’s overall picture' : (nCatName[s.newsCat] || ''),
+      iso: ins.generated_at, ago: nAgo(ins.generated_at), isNew: !!INSIGHTS.fresh[ins.id],
+      when: new Date(ins.generated_at).toLocaleString('en-GB', { day: 'numeric', month: 'short', hour: '2-digit', minute: '2-digit' }),
+      count: ins.story_count, model: ins.model,
+      points: (ins.points || []).map((p) => ({ text: p.text, cites: (p.sources || []).map((n) => {
+        const src = (ins.sources || []).find((x) => x.n === n);
+        return src ? { n, url: src.url, title: src.source + ': ' + src.title, label: 'Source ' + n + ': ' + src.source + ', ' + src.title } : null;
+      }).filter(Boolean) })),
+      why: ins.why_it_matters || '', whyLabel: ins.lang === 'en' ? 'Why it matters' : 'Kenapa penting',
+      watch: (ins.watch_next || []).map((text) => ({ text })), hasWatch: (ins.watch_next || []).length > 0,
+      watchLabel: ins.lang === 'en' ? 'Watch next' : 'Perlu dipantau'
+    } : null;
 
     // ---------- Tabs ----------
     const TABS = [
@@ -1205,7 +1240,7 @@ class Component extends DCLogic {
 
     return {
       src: SRC,
-      kpis, tickerLoop, live,
+      kpis, tickerLoop, live, ai,
       goBayar: () => this.setState({ tab: 'bayar' }),
       tabs,
       tBerita: { tagStyle: tagStyle('berita') }, tInsight: { tagStyle: tagStyle('insight') },
@@ -1286,21 +1321,43 @@ class Component extends DCLogic {
       }).then(function () { loading = false; });
     }
 
+    // AI insights: keep the newest row per category.
+    function takeInsight(row, markFresh) {
+      var cur = INSIGHTS.byCat[row.category];
+      if (cur && cur.generated_at >= row.generated_at) return false;
+      INSIGHTS.byCat[row.category] = row;
+      if (markFresh) INSIGHTS.fresh[row.id] = Date.now();
+      return true;
+    }
+    function loadInsights() {
+      sb.from('news_insights').select('*').order('generated_at', { ascending: false }).limit(60).then(function (res) {
+        if (res.error) throw res.error;
+        var hadAny = Object.keys(INSIGHTS.byCat).length > 0, changed = false;
+        (res.data || []).forEach(function (r) { if (takeInsight(r, hadAny)) changed = true; });
+        if (changed) bump();
+      }).catch(function (e) { console.warn('AI insights: load failed', e); });
+    }
+
     load();
+    loadInsights();
 
     sb.channel('news-live')
       .on('postgres_changes', { event: 'INSERT', schema: 'public', table: 'news_articles' }, function (p) {
         if (merge([p.new], true)) { NEWS.status = 'live'; NEWS.updated = new Date(); bump(); }
       })
-      .subscribe(function (st) { if (st === 'SUBSCRIBED') load(); });
+      .on('postgres_changes', { event: 'INSERT', schema: 'public', table: 'news_insights' }, function (p) {
+        if (takeInsight(p.new, true)) bump();
+      })
+      .subscribe(function (st) { if (st === 'SUBSCRIBED') { load(); loadInsights(); } });
 
     // Safety net if the realtime socket drops, plus a refresh when the tab comes back.
-    setInterval(load, 5 * 60 * 1000);
-    document.addEventListener('visibilitychange', function () { if (!document.hidden) load(); });
+    setInterval(function () { load(); loadInsights(); }, 5 * 60 * 1000);
+    document.addEventListener('visibilitychange', function () { if (!document.hidden) { load(); loadInsights(); } });
     // Tick once a minute: "x min ago" labels, and "New" badges expire after 10 minutes.
     setInterval(function () {
       var cut = Date.now() - 10 * 60 * 1000;
       Object.keys(NEWS.fresh).forEach(function (k) { if (NEWS.fresh[k] < cut) delete NEWS.fresh[k]; });
+      Object.keys(INSIGHTS.fresh).forEach(function (k) { if (INSIGHTS.fresh[k] < cut) delete INSIGHTS.fresh[k]; });
       bump({ clock: Date.now() });
     }, 60 * 1000);
   })();
