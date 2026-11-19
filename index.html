@@ -85,7 +85,31 @@ button:focus-visible,a:focus-visible{outline:3px solid #A5B4FC;outline-offset:2p
 </div>
 
 <section aria-label="Highlight and key data" style="display: flex; flex-wrap: wrap; gap: 18px; margin-top: 18px">
-<article class="lift" style="flex: 999 1 560px; min-width: 0; position: relative; overflow: hidden; border-radius: 24px; min-height: 380px; background: linear-gradient(135deg, #1D4ED8 0%, #6D28D9 55%, #DB2777 120%); background-size: 200% 200%; animation: shine 14s ease-in-out infinite alternate; display: flex; flex-direction: column; justify-content: flex-end">
+<!-- AI INSIGHT (Gemini, filled by scripts/insights.mjs); the static highlight below is the fallback -->
+<article v-if="V.ai" aria-labelledby="ai-head" :lang="V.ai.lang" style="flex: 999 1 560px; min-width: 0; position: relative; overflow: hidden; border-radius: 24px; min-height: 380px; background: linear-gradient(135deg, #1D4ED8 0%, #6D28D9 55%, #DB2777 120%); background-size: 200% 200%; animation: shine 14s ease-in-out infinite alternate; display: flex; flex-direction: column">
+<div aria-hidden="true" style="position: absolute; inset: 0; background-image: radial-gradient(rgba(255,255,255,0.18) 1px, transparent 1px); background-size: 18px 18px; opacity: 0.5"></div>
+<div aria-hidden="true" style="position: absolute; right: -80px; top: -80px; width: 320px; height: 320px; border-radius: 50%; border: 2px dashed rgba(255,255,255,0.28); animation: spin 40s linear infinite"></div>
+<div style="position: relative; flex: 1; padding: 24px 26px; background: linear-gradient(160deg, rgba(6,10,38,0.25), rgba(6,10,38,0.78)); display: flex; flex-direction: column; gap: 12px">
+<div style="display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 8px">
+<span style="display: flex; flex-wrap: wrap; align-items: center; gap: 8px"><span lang="en" style="font-size: 11px; font-weight: 800; letter-spacing: 0.1em; text-transform: uppercase; padding: 5px 10px; border-radius: 999px; background: rgba(255,255,255,0.18); border: 1px solid rgba(255,255,255,0.35)">AI Insight · {{ V.ai.scope }}</span><span v-if="V.ai.isNew" lang="en" :style="V.live.newStyle">New</span></span>
+<span lang="en" style="font-size: 12px; color: #E0E7FF">Updated <time :datetime="V.ai.iso" :title="V.ai.when">{{ V.ai.ago }}</time> · from {{ V.ai.count }} stories</span>
+</div>
+<div role="group" lang="en" aria-label="Choose an insight topic" style="display: flex; flex-wrap: wrap; gap: 6px">
+<div style="display:contents" v-for="t in V.ai.topics"><button type="button" @click="t.pick" :aria-pressed="t.on" :style="t.style">{{ t.label }}</button></div>
+</div>
+<h2 id="ai-head" style="margin: 4px 0 0; font-family: 'Sora', sans-serif; font-size: 30px; line-height: 1.18; font-weight: 800; max-width: 760px">{{ V.ai.headline }}</h2>
+<p style="margin: 0; font-size: 15px; line-height: 1.6; color: #E0E7FF; max-width: 760px">{{ V.ai.summary }}</p>
+<ul style="margin: 0; padding-left: 20px; display: flex; flex-direction: column; gap: 7px; font-size: 14px; line-height: 1.55; color: #F1F5F9; max-width: 780px">
+<div style="display:contents" v-for="p in V.ai.points"><li>{{ p.text }}<span style="display:contents" v-for="c in p.cites"> <a :href="c.url" target="_blank" rel="noopener" :title="c.title" :aria-label="c.label" style="display: inline-flex; align-items: center; justify-content: center; min-width: 22px; height: 20px; padding: 0 5px; border-radius: 6px; font-size: 11px; font-weight: 800; text-decoration: none; color: #1E1B4B; background: rgba(255,255,255,0.85); vertical-align: 1px">{{ c.n }}</a></span></li></div>
+</ul>
+<div style="display: flex; flex-wrap: wrap; gap: 10px; margin-top: 2px">
+<div v-if="V.ai.why" style="flex: 1 1 260px; min-width: 0; padding: 12px 14px; border-radius: 14px; background: rgba(255,255,255,0.12); border: 1px solid rgba(255,255,255,0.25); font-size: 14px; line-height: 1.55; color: #F1F5F9"><strong style="display: block; margin-bottom: 4px; font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase; color: #BFDBFE">{{ V.ai.whyLabel }}</strong>{{ V.ai.why }}</div>
+<div v-if="V.ai.hasWatch" style="flex: 1 1 260px; min-width: 0; padding: 12px 14px; border-radius: 14px; background: rgba(255,255,255,0.12); border: 1px solid rgba(255,255,255,0.25); font-size: 14px; line-height: 1.55; color: #F1F5F9"><strong style="display: block; margin-bottom: 4px; font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase; color: #A7F3D0">{{ V.ai.watchLabel }}</strong><ul style="margin: 0; padding-left: 18px"><div style="display:contents" v-for="w in V.ai.watch"><li>{{ w.text }}</li></div></ul></div>
+</div>
+<span lang="en" style="margin-top: auto; padding-top: 4px; font-size: 12px; line-height: 1.5; color: #C7D2FE">Written by AI ({{ V.ai.model }}) from the latest news below. It can be wrong or miss context: open the numbered sources before relying on it.</span>
+</div>
+</article>
+<article v-else class="lift" style="flex: 999 1 560px; min-width: 0; position: relative; overflow: hidden; border-radius: 24px; min-height: 380px; background: linear-gradient(135deg, #1D4ED8 0%, #6D28D9 55%, #DB2777 120%); background-size: 200% 200%; animation: shine 14s ease-in-out infinite alternate; display: flex; flex-direction: column; justify-content: flex-end">
 <div aria-hidden="true" style="position: absolute; inset: 0; background-image: radial-gradient(rgba(255,255,255,0.18) 1px, transparent 1px); background-size: 18px 18px; opacity: 0.6"></div>
 <div aria-hidden="true" style="position: absolute; right: -60px; top: -60px; width: 320px; height: 320px; border-radius: 50%; border: 2px dashed rgba(255,255,255,0.3); animation: spin 40s linear infinite"></div>
 <div aria-hidden="true" style="position: absolute; right: 9%; top: 14%; width: 250px; height: 156px; border-radius: 18px; background: linear-gradient(135deg, rgba(255,255,255,0.95), rgba(219,234,254,0.85)); box-shadow: 0 24px 60px rgba(15,23,42,0.45); animation: floaty 6s ease-in-out infinite; padding: 18px; box-sizing: border-box; display: flex; flex-direction: column; justify-content: space-between">
@@ -153,23 +177,6 @@ button:focus-visible,a:focus-visible{outline:3px solid #A5B4FC;outline-offset:2p
 <button type="button" @click="c.pick" :aria-pressed="c.on" :style="c.style">{{ c.label }} <span :style="c.countStyle">{{ c.count }}</span></button>
 </div>
 </div>
-
-<article v-if="V.ai" aria-labelledby="ai-head" :lang="V.ai.lang" style="position: relative; overflow: hidden; border-radius: 20px; padding: 20px 22px; display: flex; flex-direction: column; gap: 12px; border: 2px solid transparent; background: linear-gradient(#0E1442, #0E1442) padding-box, linear-gradient(135deg, #60A5FA, #A78BFA, #22D3EE) border-box">
-<div style="display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 8px">
-<span style="display: flex; flex-wrap: wrap; align-items: center; gap: 8px"><span lang="en" :style="V.tInsight.tagStyle">AI Insight</span><span lang="en" style="font-size: 12px; color: #B4C0DA">{{ V.ai.scope }}</span><span v-if="V.ai.isNew" lang="en" :style="V.live.newStyle">New</span></span>
-<span lang="en" style="font-size: 12px; color: #8E9BBF">Updated <time :datetime="V.ai.iso" :title="V.ai.when">{{ V.ai.ago }}</time> · from {{ V.ai.count }} stories</span>
-</div>
-<h3 id="ai-head" style="margin: 0; font-family: 'Sora', sans-serif; font-size: 22px; line-height: 1.25; font-weight: 800">{{ V.ai.headline }}</h3>
-<p style="margin: 0; font-size: 15px; line-height: 1.6; color: #E0E7FF">{{ V.ai.summary }}</p>
-<ul style="margin: 0; padding-left: 20px; display: flex; flex-direction: column; gap: 8px; font-size: 14px; line-height: 1.55; color: #E2E8F0">
-<div style="display:contents" v-for="p in V.ai.points"><li>{{ p.text }}<span style="display:contents" v-for="c in p.cites"> <a :href="c.url" target="_blank" rel="noopener" :title="c.title" :aria-label="c.label" style="display: inline-flex; align-items: center; justify-content: center; min-width: 22px; height: 20px; padding: 0 5px; border-radius: 6px; font-size: 11px; font-weight: 800; text-decoration: none; color: #DBEAFE; background: rgba(96,165,250,0.18); border: 1px solid rgba(147,197,253,0.4); vertical-align: 1px">{{ c.n }}</a></span></li></div>
-</ul>
-<div style="display: flex; flex-wrap: wrap; gap: 12px">
-<div v-if="V.ai.why" style="flex: 1 1 280px; min-width: 0; padding: 12px 14px; border-radius: 14px; background: rgba(96,165,250,0.1); border: 1px solid rgba(147,197,253,0.25); font-size: 14px; line-height: 1.55; color: #DBEAFE"><strong style="display: block; margin-bottom: 4px; font-size: 12px; letter-spacing: 0.06em; text-transform: uppercase; color: #93C5FD">{{ V.ai.whyLabel }}</strong>{{ V.ai.why }}</div>
-<div v-if="V.ai.hasWatch" style="flex: 1 1 280px; min-width: 0; padding: 12px 14px; border-radius: 14px; background: rgba(45,212,191,0.08); border: 1px solid rgba(94,234,212,0.25); font-size: 14px; line-height: 1.55; color: #CCFBF1"><strong style="display: block; margin-bottom: 4px; font-size: 12px; letter-spacing: 0.06em; text-transform: uppercase; color: #5EEAD4">{{ V.ai.watchLabel }}</strong><ul style="margin: 0; padding-left: 18px"><div style="display:contents" v-for="w in V.ai.watch"><li>{{ w.text }}</li></div></ul></div>
-</div>
-<span lang="en" style="font-size: 12px; line-height: 1.5; color: #8E9BBF">Written by AI ({{ V.ai.model }}) from the headlines above. It can be wrong or miss context: open the numbered sources before relying on it.</span>
-</article>
 
 <p v-if="V.live.showEmpty" style="margin: 0; padding: 22px; border-radius: 18px; background: rgba(255,255,255,0.05); border: 1px dashed rgba(255,255,255,0.22); font-size: 15px; line-height: 1.55; color: #CBD5E1">{{ V.live.emptyText }}</p>
 
@@ -889,10 +896,19 @@ class Component extends DCLogic {
     };
 
     // ---------- AI insight for the selected topic ----------
-    const ins = INSIGHTS.byCat[s.newsCat];
+    // Follows the topic filter; topics without an insight show the overall brief.
+    const insCat = INSIGHTS.byCat[s.newsCat] ? s.newsCat : 'semua';
+    const ins = INSIGHTS.byCat[insCat];
     const ai = ins ? {
       lang: ins.lang || 'id', headline: ins.headline, summary: ins.summary,
-      scope: s.newsCat === 'semua' ? 'Today’s overall picture' : (nCatName[s.newsCat] || ''),
+      scope: insCat === 'semua' ? 'Today’s overall picture' : (nCatName[insCat] || ''),
+      topics: NCAT.filter(([id]) => INSIGHTS.byCat[id]).map(([id, label]) => ({
+        label: id === 'semua' ? 'Overall' : label, on: insCat === id,
+        pick: () => this.setState({ newsCat: id, newsLimit: 12 }),
+        style: 'min-height:36px;padding:0 12px;border-radius:999px;font-size:12px;font-weight:700;cursor:pointer;' + (insCat === id
+          ? 'border:1px solid #FFFFFF;background:#FFFFFF;color:#1E1B4B;'
+          : 'border:1px solid rgba(255,255,255,0.35);background:rgba(255,255,255,0.1);color:#F1F5F9;')
+      })),
       iso: ins.generated_at, ago: nAgo(ins.generated_at), isNew: !!INSIGHTS.fresh[ins.id],
       when: new Date(ins.generated_at).toLocaleString('en-GB', { day: 'numeric', month: 'short', hour: '2-digit', minute: '2-digit' }),
       count: ins.story_count, model: ins.model,
