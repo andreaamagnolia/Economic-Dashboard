@@ -1,0 +1,16 @@
+[
+  { "source": "CNBC Indonesia", "url": "https://www.cnbcindonesia.com/market/rss", "lang": "id", "scope": "id", "category": "pasar" },
+  { "source": "CNBC Indonesia", "url": "https://www.cnbcindonesia.com/news/rss", "lang": "id", "scope": "id", "economyOnly": true },
+  { "source": "Antara", "url": "https://www.antaranews.com/rss/ekonomi.xml", "lang": "id", "scope": "id" },
+  { "source": "Antara", "url": "https://www.antaranews.com/rss/ekonomi-finansial.xml", "lang": "id", "scope": "id" },
+  { "source": "detikFinance", "url": "https://finance.detik.com/rss", "lang": "id", "scope": "id" },
+  { "source": "CNN Indonesia", "url": "https://www.cnnindonesia.com/ekonomi/rss", "lang": "id", "scope": "id" },
+  { "source": "Republika", "url": "https://www.republika.co.id/rss/ekonomi", "lang": "id", "scope": "id" },
+  { "source": "Okezone Economy", "url": "https://sindikasi.okezone.com/index.php/rss/11/RSS2.0", "lang": "id", "scope": "id" },
+  { "source": "Liputan6", "url": "https://feed.liputan6.com/rss/bisnis", "lang": "id", "scope": "id" },
+
+  { "source": "BBC News", "url": "https://feeds.bbci.co.uk/news/business/rss.xml", "lang": "en", "scope": "global" },
+  { "source": "The Guardian", "url": "https://www.theguardian.com/business/economics/rss", "lang": "en", "scope": "global" },
+  { "source": "Federal Reserve", "url": "https://www.federalreserve.gov/feeds/press_all.xml", "lang": "en", "scope": "global", "category": "moneter" },
+  { "source": "European Central Bank", "url": "https://www.ecb.europa.eu/rss/press.html", "lang": "en", "scope": "global", "category": "moneter" }
+]

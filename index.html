@@ -29,6 +29,22 @@ button:focus-visible,a:focus-visible{outline:3px solid #A5B4FC;outline-offset:2p
 @keyframes nudge{0%,100%{transform:translateX(0)}50%{transform:translateX(4px)}}
 .lift{transition:transform .25s ease,box-shadow .25s ease}
 .lift:hover{transform:translateY(-4px);box-shadow:0 16px 40px rgba(91,33,182,.45)}
+.nk-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:14px}
+.nk-card{position:relative;overflow:hidden;border-radius:18px;background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.13);display:flex;flex-direction:column;min-width:0}
+.nk-media{position:relative;aspect-ratio:16/9;overflow:hidden;background:#111744;flex:none}
+.nk-media img,.nk-lead>img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transition:opacity .3s ease}
+.nk-link{color:#F8FAFC;text-decoration:none}
+.nk-link::after{content:'';position:absolute;inset:0;z-index:2}
+.nk-link:hover{color:#DBEAFE;text-decoration:underline}
+.nk-link:focus-visible{outline:none}
+.nk-card:focus-within,.nk-lead:focus-within,.nk-side:focus-within{outline:3px solid #A5B4FC;outline-offset:2px}
+.nk-c2{display:-webkit-box;-webkit-box-orient:vertical;-webkit-line-clamp:2;overflow:hidden}
+.nk-c3{display:-webkit-box;-webkit-box-orient:vertical;-webkit-line-clamp:3;overflow:hidden}
+.nk-lead{flex:2 1 520px;min-width:0;position:relative;overflow:hidden;border-radius:22px;min-height:380px;display:flex;flex-direction:column;justify-content:flex-end;background:#111744;border:1px solid rgba(255,255,255,0.14)}
+.nk-side{position:relative;display:flex;gap:12px;align-items:flex-start;padding:10px;border-radius:16px;background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.12)}
+.nk-thumb{position:relative;flex:none;width:112px;aspect-ratio:4/3;border-radius:12px;overflow:hidden;background:#111744}
+.nk-thumb img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transition:opacity .3s ease}
+@media (max-width:560px){.nk-lead{min-height:320px}.nk-thumb{width:88px}}
 @media (prefers-reduced-motion: reduce){*{animation:none !important;transition:none !important}}
 </style>
 </head>
@@ -120,6 +136,67 @@ button:focus-visible,a:focus-visible{outline:3px solid #A5B4FC;outline-offset:2p
 </div>
 <span style="font-size: 11px; color: #8E9BBF">Key data: bi.go.id, checked 17 Nov 2026 at 23:30 WIB</span>
 </div>
+</section>
+
+<!-- LIVE NEWS (Supabase, filled by scripts/ingest.mjs) -->
+<section aria-labelledby="h-live" style="margin-top: 30px; display: flex; flex-direction: column; gap: 14px">
+<div style="display: flex; flex-wrap: wrap; align-items: flex-end; justify-content: space-between; gap: 10px">
+<div style="display: flex; flex-direction: column; gap: 4px">
+<h2 id="h-live" style="margin: 0; font-family: 'Sora', sans-serif; font-size: 30px; line-height: 1.15; font-weight: 800">Latest news</h2>
+<span style="font-size: 13px; color: #B4C0DA">Pulled automatically from Indonesian and world outlets · each story links to its original source</span>
+</div>
+<span role="status" :style="V.live.statusStyle"><span :style="V.live.dotStyle"></span>{{ V.live.statusText }}</span>
+</div>
+
+<div role="group" aria-label="Filter news by topic" style="display: flex; flex-wrap: wrap; gap: 8px">
+<div style="display:contents" v-for="c in V.live.cats">
+<button type="button" @click="c.pick" :aria-pressed="c.on" :style="c.style">{{ c.label }} <span :style="c.countStyle">{{ c.count }}</span></button>
+</div>
+</div>
+
+<p v-if="V.live.showEmpty" style="margin: 0; padding: 22px; border-radius: 18px; background: rgba(255,255,255,0.05); border: 1px dashed rgba(255,255,255,0.22); font-size: 15px; line-height: 1.55; color: #CBD5E1">{{ V.live.emptyText }}</p>
+
+<div v-if="V.live.lead" style="display: flex; flex-wrap: wrap; gap: 14px">
+<article class="nk-lead lift">
+<div aria-hidden="true" :style="V.live.lead.ph">{{ V.live.lead.initial }}</div>
+<img v-if="V.live.lead.img" :src="V.live.lead.img" alt="" referrerpolicy="no-referrer" onerror="this.style.opacity=0" onload="this.style.opacity=1">
+<div style="position: relative; padding: 24px; background: linear-gradient(0deg, rgba(6,10,38,0.96) 20%, rgba(6,10,38,0.6) 65%, rgba(6,10,38,0)); display: flex; flex-direction: column; gap: 9px">
+<span style="display: flex; flex-wrap: wrap; gap: 6px"><span :style="V.live.lead.tag">{{ V.live.lead.catLabel }}</span><span v-if="V.live.lead.isNew" :style="V.live.newStyle">New</span></span>
+<h3 :lang="V.live.lead.lang" style="margin: 0; font-family: 'Sora', sans-serif; font-size: 26px; line-height: 1.22; font-weight: 800; max-width: 760px"><a class="nk-link" :href="V.live.lead.url" target="_blank" rel="noopener">{{ V.live.lead.title }}</a></h3>
+<p v-if="V.live.lead.summary" :lang="V.live.lead.lang" class="nk-c3" style="margin: 0; font-size: 15px; line-height: 1.55; color: #E0E7FF; max-width: 720px">{{ V.live.lead.summary }}</p>
+<span style="font-size: 13px; color: #CBD5E1"><strong style="color: #FFFFFF">{{ V.live.lead.source }}</strong> · <time :datetime="V.live.lead.iso" :title="V.live.lead.when">{{ V.live.lead.ago }}</time></span>
+</div>
+</article>
+<div style="flex: 1 1 340px; min-width: 0; display: flex; flex-direction: column; gap: 10px">
+<div style="display:contents" v-for="n in V.live.side">
+<article class="nk-side lift">
+<div class="nk-thumb"><div aria-hidden="true" :style="n.phSmall">{{ n.initial }}</div><img v-if="n.img" :src="n.img" alt="" loading="lazy" referrerpolicy="no-referrer" onerror="this.style.opacity=0" onload="this.style.opacity=1"></div>
+<div style="min-width: 0; display: flex; flex-direction: column; gap: 5px">
+<span style="display: flex; flex-wrap: wrap; gap: 6px"><span :style="n.tagSmall">{{ n.catLabel }}</span><span v-if="n.isNew" :style="V.live.newStyle">New</span></span>
+<h3 :lang="n.lang" class="nk-c3" style="margin: 0; font-size: 15px; line-height: 1.35; font-weight: 700"><a class="nk-link" :href="n.url" target="_blank" rel="noopener">{{ n.title }}</a></h3>
+<span style="font-size: 12px; color: #B4C0DA">{{ n.source }} · <time :datetime="n.iso" :title="n.when">{{ n.ago }}</time></span>
+</div>
+</article>
+</div>
+</div>
+</div>
+
+<div v-if="V.live.hasGrid" class="nk-grid">
+<div style="display:contents" v-for="n in V.live.rest">
+<article class="nk-card lift">
+<div class="nk-media"><div aria-hidden="true" :style="n.ph">{{ n.initial }}</div><img v-if="n.img" :src="n.img" alt="" loading="lazy" referrerpolicy="no-referrer" onerror="this.style.opacity=0" onload="this.style.opacity=1"></div>
+<div style="padding: 14px 16px 16px; display: flex; flex-direction: column; gap: 7px; flex: 1">
+<span style="display: flex; flex-wrap: wrap; gap: 6px"><span :style="n.tagSmall">{{ n.catLabel }}</span><span v-if="n.isNew" :style="V.live.newStyle">New</span></span>
+<h3 :lang="n.lang" class="nk-c3" style="margin: 0; font-size: 16px; line-height: 1.35; font-weight: 700"><a class="nk-link" :href="n.url" target="_blank" rel="noopener">{{ n.title }}</a></h3>
+<p v-if="n.summary" :lang="n.lang" class="nk-c2" style="margin: 0; font-size: 13px; line-height: 1.5; color: #B4C0DA">{{ n.summary }}</p>
+<span style="margin-top: auto; padding-top: 4px; font-size: 12px; color: #8E9BBF"><strong style="color: #CBD5E1">{{ n.source }}</strong> · <time :datetime="n.iso" :title="n.when">{{ n.ago }}</time></span>
+</div>
+</article>
+</div>
+</div>
+
+<button v-if="V.live.hasMore" type="button" @click="V.live.more" style="align-self: center; min-height: 44px; padding: 0 22px; border-radius: 999px; border: 1px solid rgba(255,255,255,0.25); background: rgba(255,255,255,0.08); color: #F1F5F9; font-weight: 700; font-size: 14px; cursor: pointer">Show more stories</button>
+<span style="font-size: 12px; color: #8E9BBF">Headlines, short excerpts and photos belong to their outlets; open a story to read it in full on the source site.</span>
 </section>
 
 <nav aria-label="Sections" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 10px; padding: 26px 0 14px">
@@ -644,16 +721,21 @@ button:focus-visible,a:focus-visible{outline:3px solid #A5B4FC;outline-offset:2p
 
 <footer style="margin-top: 44px; padding: 16px 20px; border-radius: 16px; background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); display: flex; flex-wrap: wrap; justify-content: space-between; gap: 8px; font-size: 13px; color: #B4C0DA">
 <span>Kabar Ekonomi · working name · personal study project, not an official Bank Indonesia product</span>
-<span>Key data from bi.go.id · section news and maps are still illustrative samples</span>
+<span>Key data from bi.go.id · Latest news pulled from outlet RSS feeds · section news and maps are still illustrative samples</span>
 </footer>
 
 </div>
 </div>
 </div>
 <script src="./petite-vue.iife.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.58.0/dist/umd/supabase.js"></script>
+<script src="./config.js"></script>
 <script>
 (function () {
   var store = PetiteVue.reactive({ s: {} });
+  // Live news lives outside the reactive store (it can be hundreds of rows);
+  // bumping store.s.newsVer tells the view to re-render.
+  var NEWS = { items: [], status: 'idle', updated: null, fresh: {} };
   class DCLogic {
     constructor(props) { this.props = props || {}; }
     get state() { return store.s; }
@@ -667,7 +749,8 @@ class Component extends DCLogic {
       tab: 'inflasi', infRegion: 'jawa', commodity: 'semua', infMore: false,
       worldTab: 'today', worldCat: 'semua', worldRegion: null, openMeaning: 'w1',
       umkmCat: 'kuliner', umkmMore: false, payScope: 'id',
-      rupLayer: 'semua', rupRegion: 'kalimantan', studioQ: 'q1'
+      rupLayer: 'semua', rupRegion: 'kalimantan', studioQ: 'q1',
+      newsCat: 'semua', newsLimit: 12, newsVer: 0, clock: 0
     };
   }
 
@@ -720,7 +803,71 @@ class Component extends DCLogic {
       ['FX reserves', 'USD146,765 million (30 Oct 2026)', 'en'],
       ['Payments', 'Kartu Kredit Indonesia kini diterbitkan 8 penyelenggara jasa pembayaran', 'id']
     ];
-    const tickerLoop = TICK.concat(TICK).map(([k, v, lang]) => ({ k, v, lang }));
+    const HEAD = NEWS.items.slice(0, 6).map((a) => [a.source, a.title, a.lang]);
+    const tickerLoop = HEAD.concat(TICK, HEAD, TICK).map(([k, v, lang]) => ({ k, v, lang }));
+
+    // ---------- Live news (Supabase) ----------
+    const NCAT = [['semua', 'All'], ['inflasi', 'Inflation'], ['moneter', 'Monetary policy'], ['pasar', 'Markets & FX'], ['bayar', 'Payments'],
+      ['rupiah', 'Rupiah & cash'], ['umkm', 'MSMEs'], ['dunia', 'World'], ['umum', 'Business']];
+    const NCOL = { inflasi: '#F59E0B', moneter: '#3B82F6', pasar: '#22D3EE', bayar: '#A855F7', rupiah: '#6366F1', umkm: '#10B981', dunia: '#38BDF8', umum: '#94A3B8' };
+    const nCatName = {};
+    NCAT.forEach(([k, v]) => { nCatName[k] = v; });
+    const nNow = s.clock || Date.now();
+    const nAgo = (iso) => {
+      const m = Math.max(0, Math.round((nNow - Date.parse(iso)) / 60000));
+      if (m < 1) return 'just now';
+      if (m < 60) return m + ' min ago';
+      if (m < 1440) return Math.round(m / 60) + ' h ago';
+      return new Date(iso).toLocaleDateString('en-GB', { day: 'numeric', month: 'short' });
+    };
+    const nTag = (cat, small) => 'display:inline-flex;align-items:center;font-size:' + (small ? 10 : 11) + 'px;font-weight:800;letter-spacing:0.06em;text-transform:uppercase;padding:' + (small ? '3px 8px' : '4px 10px') + ';border-radius:999px;color:#F8FAFC;background:' + (NCOL[cat] || '#94A3B8') + '40;border:1px solid ' + (NCOL[cat] || '#94A3B8') + 'B3;';
+    const nPh = (cat, size) => 'position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-family:Sora,sans-serif;font-size:' + size + 'px;font-weight:800;color:rgba(255,255,255,0.35);background:radial-gradient(circle at 30% 20%,' + (NCOL[cat] || '#64748B') + '88,transparent 60%),linear-gradient(135deg,#1E1B4B,#0B1036);';
+    const nCard = (a) => ({
+      url: a.url, title: a.title, summary: a.summary || '', img: a.image_url || '', lang: a.lang || 'id',
+      source: a.source, iso: a.published_at, ago: nAgo(a.published_at),
+      when: new Date(a.published_at).toLocaleString('en-GB', { day: 'numeric', month: 'short', year: 'numeric', hour: '2-digit', minute: '2-digit' }),
+      catLabel: nCatName[a.category] || 'News', tag: nTag(a.category, false), tagSmall: nTag(a.category, true),
+      ph: nPh(a.category, 54), phSmall: nPh(a.category, 30), initial: (a.source || '?').charAt(0), isNew: !!NEWS.fresh[a.id]
+    });
+    const nCounts = { semua: NEWS.items.length };
+    NEWS.items.forEach((a) => { nCounts[a.category] = (nCounts[a.category] || 0) + 1; });
+    const nAll = s.newsCat === 'semua' ? NEWS.items : NEWS.items.filter((a) => a.category === s.newsCat);
+    // Lead slot: the newest story among the first ten that has a photo and a real topic.
+    let nLead = nAll.slice(0, 10).findIndex((a) => a.image_url && a.category !== 'umum');
+    if (nLead < 0) nLead = 0;
+    const nList = nAll.length ? [nAll[nLead]].concat(nAll.slice(0, nLead), nAll.slice(nLead + 1)) : nAll;
+    const nReady = NEWS.status === 'live' || NEWS.status === 'offline';
+    const nStatus = {
+      idle: ['Connecting…', '#FBBF24', false], loading: ['Connecting…', '#FBBF24', false],
+      live: ['Live · updated ' + (NEWS.updated ? NEWS.updated.toLocaleTimeString('en-GB', { hour: '2-digit', minute: '2-digit' }) : ''), '#34D399', true],
+      offline: ['Connection lost · showing last loaded news', '#F87171', false],
+      error: ['Could not reach the news database', '#F87171', false],
+      unconfigured: ['Not connected yet', '#94A3B8', false]
+    }[NEWS.status];
+    const nEmpty = {
+      idle: 'Loading the latest news…', loading: 'Loading the latest news…',
+      error: 'The news database could not be reached. The page will keep retrying.',
+      unconfigured: 'Live news appears here once the site is connected to Supabase (config.js).'
+    }[NEWS.status] || (nList.length ? '' : 'No stories in this topic yet. New stories arrive every 15 minutes.');
+    const live = {
+      statusText: nStatus[0],
+      statusStyle: 'display:inline-flex;align-items:center;gap:8px;padding:6px 12px;border-radius:999px;font-size:13px;font-weight:700;color:#E2E8F0;background:rgba(255,255,255,0.07);border:1px solid rgba(255,255,255,0.18);',
+      dotStyle: 'width:8px;height:8px;border-radius:50%;background:' + nStatus[1] + ';' + (nStatus[2] ? 'animation:blink 1.4s ease-in-out infinite;' : ''),
+      newStyle: 'display:inline-flex;align-items:center;font-size:10px;font-weight:800;letter-spacing:0.08em;text-transform:uppercase;padding:3px 8px;border-radius:999px;background:#EC4899;color:#FFFFFF;',
+      cats: NCAT.filter(([id]) => id === 'semua' || id === s.newsCat || nCounts[id]).map(([id, label]) => ({
+        label, count: nCounts[id] || 0, on: s.newsCat === id,
+        pick: () => this.setState({ newsCat: id, newsLimit: 12 }),
+        style: chip(s.newsCat === id).replace('min-height:44px;padding:0 18px', 'min-height:40px;padding:0 14px'),
+        countStyle: 'font-size:11px;font-weight:800;padding:1px 7px;border-radius:999px;background:rgba(255,255,255,0.16);'
+      })),
+      showEmpty: !!nEmpty && !(nReady && nList.length), emptyText: nEmpty,
+      lead: nReady && nList[0] ? nCard(nList[0]) : null,
+      side: nReady ? nList.slice(1, 5).map(nCard) : [],
+      rest: nReady ? nList.slice(5, 5 + s.newsLimit).map(nCard) : [],
+      hasGrid: nReady && nList.length > 5,
+      hasMore: nReady && nList.length > 5 + s.newsLimit,
+      more: () => this.setState({ newsLimit: s.newsLimit + 12 })
+    };
 
     // ---------- Tabs ----------
     const TABS = [
@@ -1058,7 +1205,7 @@ class Component extends DCLogic {
 
     return {
       src: SRC,
-      kpis, tickerLoop,
+      kpis, tickerLoop, live,
       goBayar: () => this.setState({ tab: 'bayar' }),
       tabs,
       tBerita: { tagStyle: tagStyle('berita') }, tInsight: { tagStyle: tagStyle('insight') },
@@ -1100,6 +1247,63 @@ class Component extends DCLogic {
       return cacheVal;
     }
   }).mount('#app');
+
+  // ---------- Live news loader: first load + realtime inserts + periodic refresh ----------
+  (function startNews() {
+    var cfg = window.KABAR_CONFIG || {};
+    function bump(patch) { comp.setState(Object.assign({ newsVer: (store.s.newsVer || 0) + 1 }, patch || {})); }
+    if (!cfg.supabaseUrl || !cfg.supabaseKey) { NEWS.status = 'unconfigured'; bump(); return; }
+    if (!window.supabase || !window.supabase.createClient) { NEWS.status = 'error'; bump(); return; }
+
+    var sb = window.supabase.createClient(cfg.supabaseUrl, cfg.supabaseKey, { auth: { persistSession: false, autoRefreshToken: false } });
+    var COLS = 'id,url,title,summary,image_url,source,lang,scope,category,published_at';
+    var byId = {};
+
+    function merge(rows, markFresh) {
+      var added = 0;
+      rows.forEach(function (r) {
+        if (!r || byId[r.id]) return;
+        byId[r.id] = r; NEWS.items.push(r); added++;
+        if (markFresh) NEWS.fresh[r.id] = Date.now();
+      });
+      NEWS.items.sort(function (a, b) { return a.published_at < b.published_at ? 1 : a.published_at > b.published_at ? -1 : 0; });
+      NEWS.items.splice(300).forEach(function (r) { delete byId[r.id]; });
+      return added;
+    }
+
+    var loading = false;
+    function load() {
+      if (loading) return;
+      loading = true;
+      if (!NEWS.items.length) { NEWS.status = 'loading'; bump(); }
+      sb.from('news_articles').select(COLS).order('published_at', { ascending: false }).limit(200).then(function (res) {
+        if (res.error) throw res.error;
+        merge(res.data || [], NEWS.items.length > 0);
+        NEWS.status = 'live'; NEWS.updated = new Date(); bump();
+      }).catch(function (e) {
+        console.warn('Live news: load failed', e);
+        NEWS.status = NEWS.items.length ? 'offline' : 'error'; bump();
+      }).then(function () { loading = false; });
+    }
+
+    load();
+
+    sb.channel('news-live')
+      .on('postgres_changes', { event: 'INSERT', schema: 'public', table: 'news_articles' }, function (p) {
+        if (merge([p.new], true)) { NEWS.status = 'live'; NEWS.updated = new Date(); bump(); }
+      })
+      .subscribe(function (st) { if (st === 'SUBSCRIBED') load(); });
+
+    // Safety net if the realtime socket drops, plus a refresh when the tab comes back.
+    setInterval(load, 5 * 60 * 1000);
+    document.addEventListener('visibilitychange', function () { if (!document.hidden) load(); });
+    // Tick once a minute: "x min ago" labels, and "New" badges expire after 10 minutes.
+    setInterval(function () {
+      var cut = Date.now() - 10 * 60 * 1000;
+      Object.keys(NEWS.fresh).forEach(function (k) { if (NEWS.fresh[k] < cut) delete NEWS.fresh[k]; });
+      bump({ clock: Date.now() });
+    }, 60 * 1000);
+  })();
 })();
 </script>
 </body>
