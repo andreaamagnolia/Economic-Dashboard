@@ -1,0 +1,1106 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Kabar Ekonomi — interactive economic newspaper</title>
+<meta name="description" content="A personal interactive economic newspaper for learning about central banking: Indonesia, the world, and AI-assisted insights.">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Sora:wght@500;600;700;800&amp;family=Plus+Jakarta+Sans:wght@400;500;600;700&amp;display=swap">
+<style>
+[v-cloak]{display:none}
+body{margin:0;background:#060A26}
+a{color:#93C5FD}a:hover{color:#DBEAFE}
+button{font-family:inherit}
+button:focus-visible,a:focus-visible{outline:3px solid #A5B4FC;outline-offset:2px}
+@keyframes drift1{0%{transform:translate(0,0) scale(1)}50%{transform:translate(12%,8%) scale(1.18)}100%{transform:translate(0,0) scale(1)}}
+@keyframes drift2{0%{transform:translate(0,0) scale(1.1)}50%{transform:translate(-14%,10%) scale(0.92)}100%{transform:translate(0,0) scale(1.1)}}
+@keyframes drift3{0%{transform:translate(0,0)}50%{transform:translate(8%,-12%)}100%{transform:translate(0,0)}}
+@keyframes shine{0%{background-position:0% 50%}100%{background-position:200% 50%}}
+@keyframes ticker{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+@keyframes ping{0%{transform:scale(1);opacity:.85}80%,100%{transform:scale(2.8);opacity:0}}
+@keyframes rise{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:none}}
+@keyframes grow{from{transform:scaleX(0)}to{transform:scaleX(1)}}
+@keyframes draw{from{stroke-dashoffset:320}to{stroke-dashoffset:0}}
+@keyframes blink{0%,100%{opacity:1}50%{opacity:.3}}
+@keyframes floaty{0%,100%{transform:translateY(0) rotate(-8deg)}50%{transform:translateY(-14px) rotate(-5deg)}}
+@keyframes floaty2{0%,100%{transform:translateY(0)}50%{transform:translateY(10px)}}
+@keyframes sweep{from{left:-12%}to{left:112%}}
+@keyframes spin{from{transform:rotate(0deg)}to{transform:rotate(360deg)}}
+@keyframes nudge{0%,100%{transform:translateX(0)}50%{transform:translateX(4px)}}
+.lift{transition:transform .25s ease,box-shadow .25s ease}
+.lift:hover{transform:translateY(-4px);box-shadow:0 16px 40px rgba(91,33,182,.45)}
+@media (prefers-reduced-motion: reduce){*{animation:none !important;transition:none !important}}
+</style>
+</head>
+<body>
+<div id="app" v-cloak>
+<div style="position: relative; overflow: hidden; min-height: 100vh; font-family: 'Plus Jakarta Sans', system-ui, sans-serif; color: #F1F5F9; background: #060A26">
+
+<div aria-hidden="true" style="position: absolute; inset: 0; pointer-events: none; z-index: 0">
+<div style="position: absolute; top: -220px; left: -160px; width: 720px; height: 720px; border-radius: 50%; background: #2563EB; filter: blur(110px); opacity: 0.5; animation: drift1 18s ease-in-out infinite"></div>
+<div style="position: absolute; top: -120px; right: -200px; width: 680px; height: 680px; border-radius: 50%; background: #7C3AED; filter: blur(120px); opacity: 0.5; animation: drift2 22s ease-in-out infinite"></div>
+<div style="position: absolute; top: 760px; left: 30%; width: 620px; height: 620px; border-radius: 50%; background: #0891B2; filter: blur(120px); opacity: 0.3; animation: drift3 26s ease-in-out infinite"></div>
+<div style="position: absolute; top: 1500px; right: 5%; width: 520px; height: 520px; border-radius: 50%; background: #C026D3; filter: blur(130px); opacity: 0.25; animation: drift1 30s ease-in-out infinite"></div>
+</div>
+
+<div style="position: relative; z-index: 1; max-width: 1280px; margin: 0 auto; padding: 0 24px 56px; box-sizing: border-box">
+
+<header style="display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 12px; margin-top: 18px; padding: 14px 20px; border-radius: 18px; background: rgba(255,255,255,0.07); border: 1px solid rgba(255,255,255,0.14); backdrop-filter: blur(16px)">
+<div style="display: flex; align-items: center; gap: 12px">
+<div aria-hidden="true" style="width: 42px; height: 42px; border-radius: 12px; background: conic-gradient(from 0deg, #3B82F6, #8B5CF6, #EC4899, #22D3EE, #3B82F6); animation: spin 12s linear infinite; display: flex; align-items: center; justify-content: center"><div style="width: 30px; height: 30px; border-radius: 9px; background: #0B1036"></div></div>
+<div style="display: flex; flex-direction: column">
+<span style="font-family: 'Sora', sans-serif; font-size: 22px; font-weight: 800; letter-spacing: -0.01em">Kabar Ekonomi</span>
+<span style="font-size: 12px; color: #B4C0DA">Interactive economic newspaper · learn central banking every day</span>
+</div>
+</div>
+<div style="display: flex; flex-wrap: wrap; align-items: center; gap: 10px; font-size: 13px; color: #B4C0DA">
+<span>Wednesday, 18 November 2026</span>
+<span style="display: inline-flex; align-items: center; gap: 8px; padding: 6px 12px; border-radius: 999px; background: rgba(236,72,153,0.16); border: 1px solid rgba(244,114,182,0.5); color: #FBCFE8; font-weight: 700"><span style="width: 8px; height: 8px; border-radius: 50%; background: #F472B6; animation: blink 1.4s ease-in-out infinite"></span>LIVE · morning edition</span>
+</div>
+</header>
+
+<div style="margin-top: 14px; border-radius: 14px; overflow: hidden; background: linear-gradient(90deg, rgba(37,99,235,0.35), rgba(124,58,237,0.35)); border: 1px solid rgba(255,255,255,0.14); display: flex; align-items: center">
+<span style="flex: none; padding: 10px 14px; font-size: 12px; font-weight: 800; letter-spacing: 0.1em; text-transform: uppercase; background: linear-gradient(135deg, #2563EB, #7C3AED); position: relative; z-index: 1">Latest</span>
+<div style="overflow: hidden; flex: 1; min-width: 0">
+<div style="display: inline-flex; gap: 40px; white-space: nowrap; padding: 10px 0 10px 20px; animation: ticker 40s linear infinite; font-size: 14px">
+<div style="display:contents" v-for="t in V.tickerLoop"><span><span style="color: #93C5FD; font-weight: 700">{{ t.k }}</span> <span :lang="t.lang">{{ t.v }}</span></span></div>
+</div>
+</div>
+</div>
+
+<section aria-label="Highlight and key data" style="display: flex; flex-wrap: wrap; gap: 18px; margin-top: 18px">
+<article class="lift" style="flex: 999 1 560px; min-width: 0; position: relative; overflow: hidden; border-radius: 24px; min-height: 380px; background: linear-gradient(135deg, #1D4ED8 0%, #6D28D9 55%, #DB2777 120%); background-size: 200% 200%; animation: shine 14s ease-in-out infinite alternate; display: flex; flex-direction: column; justify-content: flex-end">
+<div aria-hidden="true" style="position: absolute; inset: 0; background-image: radial-gradient(rgba(255,255,255,0.18) 1px, transparent 1px); background-size: 18px 18px; opacity: 0.6"></div>
+<div aria-hidden="true" style="position: absolute; right: -60px; top: -60px; width: 320px; height: 320px; border-radius: 50%; border: 2px dashed rgba(255,255,255,0.3); animation: spin 40s linear infinite"></div>
+<div aria-hidden="true" style="position: absolute; right: 9%; top: 14%; width: 250px; height: 156px; border-radius: 18px; background: linear-gradient(135deg, rgba(255,255,255,0.95), rgba(219,234,254,0.85)); box-shadow: 0 24px 60px rgba(15,23,42,0.45); animation: floaty 6s ease-in-out infinite; padding: 18px; box-sizing: border-box; display: flex; flex-direction: column; justify-content: space-between">
+<div style="width: 40px; height: 30px; border-radius: 6px; background: linear-gradient(135deg, #FBBF24, #F59E0B)"></div>
+<div style="display: flex; flex-direction: column; gap: 6px">
+<div style="height: 8px; width: 80%; border-radius: 4px; background: #1E3A8A; opacity: 0.6"></div>
+<div style="height: 8px; width: 50%; border-radius: 4px; background: #7C3AED; opacity: 0.5"></div>
+</div>
+</div>
+<div aria-hidden="true" style="position: absolute; right: 30%; top: 46%; width: 64px; height: 64px; border-radius: 16px; background: rgba(255,255,255,0.16); border: 1px solid rgba(255,255,255,0.4); backdrop-filter: blur(6px); animation: floaty2 5s ease-in-out infinite; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 4px; padding: 10px; box-sizing: border-box">
+<span style="background: #FFFFFF; border-radius: 2px"></span><span></span><span style="background: #FFFFFF; border-radius: 2px"></span>
+<span></span><span style="background: #FFFFFF; border-radius: 2px"></span><span></span>
+<span style="background: #FFFFFF; border-radius: 2px"></span><span style="background: #FFFFFF; border-radius: 2px"></span><span style="background: #FFFFFF; border-radius: 2px"></span>
+</div>
+<div style="position: relative; padding: 26px; background: linear-gradient(0deg, rgba(6,10,38,0.85), rgba(6,10,38,0)); display: flex; flex-direction: column; gap: 10px">
+<span style="align-self: flex-start; font-size: 11px; font-weight: 800; letter-spacing: 0.1em; text-transform: uppercase; padding: 5px 10px; border-radius: 999px; background: rgba(255,255,255,0.18); border: 1px solid rgba(255,255,255,0.35)">Highlight · Payment Systems</span>
+<h2 lang="id" style="margin: 0; font-family: 'Sora', sans-serif; font-size: 34px; line-height: 1.15; font-weight: 800; max-width: 640px">Kartu Kredit Indonesia: kartu kredit dengan jalur pembayaran domestik</h2>
+<p lang="id" style="margin: 0; font-size: 15px; line-height: 1.55; color: #E0E7FF; max-width: 620px">Skema bayar belakangan yang transaksinya diproses di infrastruktur pembayaran dalam negeri, dan bisa dipakai lewat QRIS (pindai atau tap). Sudah diterbitkan delapan penyelenggara jasa pembayaran.</p>
+<div style="display: flex; flex-wrap: wrap; align-items: center; gap: 10px">
+<button type="button" @click="V.goBayar" style="min-height: 44px; padding: 0 18px; border-radius: 12px; border: none; background: #FFFFFF; color: #1E1B4B; font-weight: 800; font-size: 14px; cursor: pointer">Open Payment Systems</button>
+<a href="https://www.bi.go.id" style="font-size: 13px; color: #E0E7FF">Source: bi.go.id · 17 Nov 2026</a>
+</div>
+</div>
+</article>
+
+<div style="flex: 1 1 420px; min-width: 0; display: flex; flex-direction: column; gap: 10px">
+<div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(190px, 1fr)); gap: 10px">
+<div style="display:contents" v-for="k in V.kpis">
+<div class="lift" style="position: relative; overflow: hidden; border-radius: 18px; padding: 16px; background: rgba(255,255,255,0.07); border: 1px solid rgba(255,255,255,0.14); backdrop-filter: blur(14px); display: flex; flex-direction: column; gap: 4px">
+<div aria-hidden="true" :style="k.bar"></div>
+<span style="font-family: 'Sora', sans-serif; font-size: 28px; font-weight: 800; line-height: 1.1; background: linear-gradient(90deg, #FFFFFF, #BFDBFE, #DDD6FE, #FFFFFF); background-size: 200% auto; -webkit-background-clip: text; background-clip: text; color: transparent; animation: shine 6s linear infinite">{{ k.value }}</span>
+<span style="font-size: 14px; font-weight: 700">{{ k.label }}</span>
+<span style="font-size: 12px; line-height: 1.4; color: #B4C0DA">{{ k.hint }}</span>
+<span style="font-size: 11px; color: #8E9BBF; margin-top: 2px">{{ k.date }}</span>
+</div>
+</div>
+</div>
+<div style="border-radius: 18px; padding: 14px 16px; background: rgba(255,255,255,0.07); border: 1px solid rgba(255,255,255,0.14); display: flex; flex-direction: column; gap: 8px">
+<div style="display: flex; justify-content: space-between; flex-wrap: wrap; gap: 6px; font-size: 13px">
+<span style="font-weight: 700">Inflation vs the 2.5±1% target</span>
+<span style="color: #99F6E4; font-weight: 700">Within target range</span>
+</div>
+<div style="position: relative; height: 14px; border-radius: 7px; background: rgba(255,255,255,0.1)">
+<div style="position: absolute; left: 30%; width: 40%; top: 0; bottom: 0; border-radius: 7px; background: linear-gradient(90deg, rgba(45,212,191,0.5), rgba(96,165,250,0.6))"></div>
+<div style="position: absolute; left: 65.6%; top: -5px; width: 4px; height: 24px; border-radius: 2px; background: #FFFFFF; box-shadow: 0 0 12px #FFFFFF"></div>
+</div>
+<div style="display: flex; justify-content: space-between; font-size: 11px; color: #8E9BBF"><span>0%</span><span>1.5%</span><span>3.28% (Sep)</span><span>3.5%</span><span>5%</span></div>
+</div>
+<span style="font-size: 11px; color: #8E9BBF">Key data: bi.go.id, checked 17 Nov 2026 at 23:30 WIB</span>
+</div>
+</section>
+
+<nav aria-label="Sections" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 10px; padding: 26px 0 14px">
+<div style="display:contents" v-for="t in V.tabs">
+<button type="button" class="lift" @click="t.pick" :aria-pressed="t.pressed" :style="t.style">
+<span style="display: flex; align-items: center; gap: 10px">
+<span :style="t.badge">{{ t.num }}</span>
+<span style="font-size: 15px; font-weight: 800; text-align: left">{{ t.name }}</span>
+</span>
+<span :style="t.qStyle">{{ t.q }}</span>
+</button>
+</div>
+</nav>
+
+<div style="display: flex; flex-wrap: wrap; align-items: center; gap: 10px 16px; padding: 10px 14px; border-radius: 12px; background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); font-size: 13px; color: #B4C0DA">
+<span style="font-weight: 700; color: #F1F5F9">How to read:</span>
+<span style="display: inline-flex; align-items: center; gap: 6px"><span :style="V.tBerita.tagStyle">News</span> facts, always with source &amp; date</span>
+<span style="display: inline-flex; align-items: center; gap: 6px"><span :style="V.tInsight.tagStyle">AI Insight</span> interpretation</span>
+<span style="display: inline-flex; align-items: center; gap: 6px"><span :style="V.tIde.tagStyle">Idea to Review</span> suggestion</span>
+<span style="display: inline-flex; align-items: center; gap: 6px"><span :style="V.tInspo.tagStyle">World Inspiration</span> practice from abroad</span>
+<span>Indonesian sources stay in Bahasa Indonesia, foreign sources in English</span>
+<span style="color: #FDE68A">News inside the sections is still sample content</span>
+</div>
+
+<!-- ① INFLATION -->
+<div style="display:contents" v-if="V.isInflasi">
+<section aria-labelledby="h-inflasi" style="animation: rise .5s ease-out both">
+<div style="display: flex; flex-direction: column; gap: 6px; padding: 30px 0 16px">
+<span style="font-size: 12px; font-weight: 800; letter-spacing: 0.14em; text-transform: uppercase; color: #93C5FD">① Inflation</span>
+<h2 id="h-inflasi" style="margin: 0; font-family: 'Sora', sans-serif; font-size: 44px; line-height: 1.1; font-weight: 800; background: linear-gradient(90deg, #FFFFFF, #93C5FD, #C4B5FD, #F9A8D4, #FFFFFF); background-size: 200% auto; -webkit-background-clip: text; background-clip: text; color: transparent; animation: shine 8s linear infinite">Where are prices moving?</h2>
+<p style="margin: 0; font-size: 16px; line-height: 1.55; color: #B4C0DA; max-width: 760px">Pick a commodity, then click an island to see which prices are moving and the news behind them.</p>
+</div>
+<div style="display: flex; flex-wrap: wrap; gap: 24px">
+<div style="flex: 999 1 560px; min-width: 0; display: flex; flex-direction: column; gap: 16px">
+<div role="group" aria-label="Pick a commodity" style="display: flex; flex-wrap: wrap; gap: 8px">
+<div style="display:contents" v-for="c in V.comms">
+<button type="button" @click="c.pick" :aria-pressed="c.pressed" :style="c.style">{{ c.name }}</button>
+</div>
+</div>
+<div style="position: relative; width: 100%; aspect-ratio: 16 / 9; border-radius: 22px; overflow: hidden; border: 1px solid rgba(255,255,255,0.14); background-color: #0A0F35; background-image: radial-gradient(rgba(148,163,184,0.22) 1px, transparent 1px), radial-gradient(ellipse at 25% 20%, rgba(59,130,246,0.35), transparent 60%), radial-gradient(ellipse at 85% 85%, rgba(139,92,246,0.35), transparent 60%); background-size: 16px 16px, 100% 100%, 100% 100%">
+<div aria-hidden="true" style="position: absolute; top: 0; bottom: 0; width: 120px; background: linear-gradient(90deg, rgba(96,165,250,0), rgba(96,165,250,0.18), rgba(96,165,250,0)); animation: sweep 6s linear infinite; pointer-events: none"></div>
+<div style="display:contents" v-for="r in V.infRegions">
+<button type="button" @click="r.pick" :aria-pressed="r.pressed" :aria-label="r.aria" :style="r.style">
+<span aria-hidden="true" style="position: relative; width: 10px; height: 10px; flex: none"><span :style="r.ring"></span><span :style="r.dot"></span></span>
+<span style="font-weight: 800; font-size: 13px; line-height: 1.15">{{ r.short }}</span>
+<span style="font-size: 11px; font-weight: 600; opacity: 0.9">{{ r.sub }}</span>
+</button>
+</div>
+<span style="position: absolute; left: 12px; bottom: 10px; font-size: 11px; color: #CBD5E1; background: rgba(6,10,38,0.7); padding: 4px 9px; border-radius: 8px">Schematic map, not to scale</span>
+</div>
+<div style="display: flex; flex-wrap: wrap; align-items: center; gap: 8px 14px; font-size: 13px; color: #B4C0DA">
+<span>Color = most-reported price direction for <strong style="color: #F1F5F9">{{ V.commodityName }}</strong>:</span>
+<span :style="V.pillNaik">▲ Up</span>
+<span :style="V.pillTurun">▼ Down</span>
+<span :style="V.pillStabil">– Stable</span>
+</div>
+
+<div style="border-radius: 20px; padding: 22px; background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.13); backdrop-filter: blur(14px); display: flex; flex-direction: column; gap: 16px">
+<div style="display: flex; flex-wrap: wrap; justify-content: space-between; align-items: baseline; gap: 8px">
+<h3 style="margin: 0; font-family: 'Sora', sans-serif; font-size: 28px; font-weight: 800">{{ V.inf.name }}</h3>
+<span style="font-size: 13px; color: #B4C0DA">{{ V.inf.n }} news reports this week</span>
+</div>
+<div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: 8px">
+<div style="display:contents" v-for="k in V.inf.comms">
+<div :style="k.rowStyle">
+<span style="font-size: 14px; font-weight: 700">{{ k.name }}</span>
+<span :style="k.pill">{{ k.label }}</span>
+</div>
+</div>
+</div>
+<p style="margin: 0; font-size: 12px; color: #8E9BBF">Price changes in numbers appear here when the data is available.</p>
+<div style="display:contents" v-for="n in V.inf.news">
+<article style="border-top: 1px solid rgba(255,255,255,0.1); padding-top: 14px; display: flex; flex-direction: column; gap: 6px">
+<span :style="V.tBerita.tagStyle">News</span>
+<h4 lang="id" style="margin: 0; font-family: 'Sora', sans-serif; font-size: 18px; line-height: 1.35; font-weight: 700">{{ n.title }}</h4>
+<p style="margin: 0; font-size: 14px; line-height: 1.55; color: #CBD5E1"><strong style="color: #F1F5F9">Cause:</strong> <span lang="id">{{ n.cause }}</span></p>
+<span style="font-size: 12px; color: #8E9BBF">{{ V.src }}</span>
+</article>
+</div>
+<blockquote style="margin: 0; padding: 14px 18px; border-radius: 14px; background: linear-gradient(135deg, rgba(139,92,246,0.22), rgba(236,72,153,0.14)); border: 1px solid rgba(196,181,253,0.3); font-size: 16px; font-style: italic; line-height: 1.5"><span lang="id">“{{ V.inf.voice }}”</span><span style="display: block; margin-top: 6px; font-style: normal; font-size: 12px; color: #C4B5FD">Sample post from this region</span></blockquote>
+</div>
+
+<div style="display: flex; flex-direction: column; gap: 12px; padding-top: 6px">
+<h3 style="margin: 0; font-size: 12px; font-weight: 800; letter-spacing: 0.14em; text-transform: uppercase; color: #93C5FD; padding-bottom: 8px; border-bottom: 1px solid rgba(255,255,255,0.14)">Lessons from abroad</h3>
+<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 12px">
+<div style="display:contents" v-for="i in V.inspoInf">
+<article class="lift" style="border-radius: 18px; padding: 18px; background: linear-gradient(160deg, rgba(20,184,166,0.16), rgba(59,130,246,0.1)); border: 1px solid rgba(94,234,212,0.25); display: flex; flex-direction: column; gap: 8px">
+<span :style="V.tInspo.tagStyle">World Inspiration · {{ i.place }}</span>
+<h4 style="margin: 0; font-family: 'Sora', sans-serif; font-size: 18px; line-height: 1.35; font-weight: 700">{{ i.title }}</h4>
+<p style="margin: 0; font-size: 14px; line-height: 1.55; color: #CBD5E1">{{ i.body }}</p>
+<p style="margin: 0; font-size: 14px; line-height: 1.55; color: #FED7AA"><strong>Could be adapted:</strong> {{ i.adapt }}</p>
+<span style="font-size: 12px; color: #8E9BBF">{{ V.src }}</span>
+</article>
+</div>
+</div>
+</div>
+</div>
+
+<aside style="flex: 1 1 320px; min-width: 0; display: flex; flex-direction: column; gap: 22px">
+<div style="display: flex; flex-direction: column; gap: 12px">
+<h3 style="margin: 0; font-size: 12px; font-weight: 800; letter-spacing: 0.14em; text-transform: uppercase; color: #93C5FD; padding-bottom: 8px; border-bottom: 1px solid rgba(255,255,255,0.14)">Trending</h3>
+<div style="display:contents" v-for="n in V.ramaiInf">
+<article class="lift" style="border-radius: 16px; padding: 14px 16px; background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.12); display: flex; flex-direction: column; gap: 6px">
+<span :style="V.tBerita.tagStyle">News</span>
+<h4 lang="id" style="margin: 0; font-family: 'Sora', sans-serif; font-size: 16px; line-height: 1.35; font-weight: 700">{{ n.title }}</h4>
+<p lang="id" style="margin: 0; font-size: 14px; line-height: 1.5; color: #CBD5E1">{{ n.body }}</p>
+<span style="font-size: 12px; color: #8E9BBF">{{ V.src }}</span>
+</article>
+</div>
+</div>
+<div style="display: flex; flex-direction: column; gap: 12px">
+<h3 style="margin: 0; font-size: 12px; font-weight: 800; letter-spacing: 0.14em; text-transform: uppercase; color: #93C5FD; padding-bottom: 8px; border-bottom: 1px solid rgba(255,255,255,0.14)">Public voice</h3>
+<p style="margin: 0; font-size: 13px; color: #B4C0DA">Bar length = how often it comes up.</p>
+<div style="display:contents" v-for="b in V.voiceInf">
+<div style="display: flex; flex-direction: column; gap: 5px">
+<span style="font-size: 14px; font-weight: 600">{{ b.label }}</span>
+<div style="height: 10px; border-radius: 5px; background: rgba(255,255,255,0.08)"><div :style="`height: 10px; border-radius: 5px; background: linear-gradient(90deg, #F59E0B, #EC4899, #8B5CF6); transform-origin: left; animation: grow 1.1s ease-out both; ${b.w}`"></div></div>
+</div>
+</div>
+<p lang="id" style="margin: 0; font-size: 15px; font-style: italic; line-height: 1.5; color: #E9D5FF">“Belanja mingguan sekarang kok cepat habis, ya.”</p>
+</div>
+<div style="border-radius: 20px; padding: 2px; background: linear-gradient(135deg, #3B82F6, #8B5CF6, #EC4899)">
+<div style="border-radius: 18px; padding: 18px; background: #0E1340; display: flex; flex-direction: column; gap: 10px">
+<h3 style="margin: 0; font-size: 12px; font-weight: 800; letter-spacing: 0.14em; text-transform: uppercase; color: #F9A8D4">Follow-up ideas</h3>
+<span :style="V.tInsight.tagStyle">AI Insight</span>
+<p lang="id" style="margin: 0; font-size: 15px; line-height: 1.5">Keluhan harga terkumpul di wilayah yang juga mengalami hambatan distribusi.</p>
+<span :style="V.tIde.tagStyle">Idea to Review</span>
+<p lang="id" style="margin: 0; font-size: 15px; line-height: 1.5">Coba dalami akses pasokannya untuk bahan koordinasi daerah.</p>
+<button type="button" @click="V.toggleInfMore" :aria-expanded="V.infMore" style="align-self: flex-start; min-height: 44px; padding: 0 16px; border-radius: 12px; border: 1px solid rgba(255,255,255,0.3); background: rgba(255,255,255,0.08); color: #FFFFFF; font-weight: 700; font-size: 14px; cursor: pointer">{{ V.infMoreLabel }}</button>
+<div style="display:contents" v-if="V.infMore">
+<div lang="id" style="border-radius: 12px; padding: 12px 14px; background: rgba(59,130,246,0.14); border: 1px solid rgba(96,165,250,0.3); display: flex; flex-direction: column; gap: 8px; font-size: 14px; line-height: 1.5; animation: rise .35s ease-out both">
+<p style="margin: 0"><strong>Dasar temuan:</strong> wilayah yang keluhannya paling sering menyebut barang kosong atau telat datang (Kalimantan, Maluku, Sumatra) juga punya berita soal cuaca, kapal, atau jalan yang terganggu.</p>
+<p style="margin: 0"><strong>Hati-hati:</strong> ini pola dari pemberitaan, belum tentu sebab-akibat. Perlu dicek dengan data harga dan stok daerah.</p>
+</div>
+</div>
+</div>
+</div>
+</aside>
+</div>
+</section>
+</div>
+
+<!-- ② FX & WORLD -->
+<div style="display:contents" v-if="V.isDunia">
+<section aria-labelledby="h-dunia" style="animation: rise .5s ease-out both">
+<div style="display: flex; flex-direction: column; gap: 6px; padding: 30px 0 16px">
+<span style="font-size: 12px; font-weight: 800; letter-spacing: 0.14em; text-transform: uppercase; color: #93C5FD">② FX &amp; World</span>
+<h2 id="h-dunia" style="margin: 0; font-family: 'Sora', sans-serif; font-size: 44px; line-height: 1.1; font-weight: 800; background: linear-gradient(90deg, #FFFFFF, #93C5FD, #C4B5FD, #F9A8D4, #FFFFFF); background-size: 200% auto; -webkit-background-clip: text; background-clip: text; color: transparent; animation: shine 8s linear infinite">What’s happening out there?</h2>
+<p style="margin: 0; font-size: 16px; line-height: 1.55; color: #B4C0DA; max-width: 760px">Zoom out to the world. Not every story has to affect Indonesia; the relevant ones get a “What does it mean for Indonesia?” button.</p>
+</div>
+<div role="group" aria-label="Pick a view" style="display: flex; flex-wrap: wrap; gap: 8px">
+<div style="display:contents" v-for="w in V.worldTabs">
+<button type="button" @click="w.pick" :aria-pressed="w.pressed" :style="w.style">{{ w.name }}</button>
+</div>
+</div>
+<div style="display: flex; flex-wrap: wrap; gap: 24px; padding-top: 16px">
+<div style="flex: 999 1 560px; min-width: 0; display: flex; flex-direction: column; gap: 14px">
+<div role="group" aria-label="Filter by story type" style="display: flex; flex-wrap: wrap; gap: 8px">
+<div style="display:contents" v-for="c in V.worldCats">
+<button type="button" @click="c.pick" :aria-pressed="c.pressed" :style="c.style"><span aria-hidden="true" :style="c.dot"></span>{{ c.name }}</button>
+</div>
+</div>
+<div style="position: relative; width: 100%; aspect-ratio: 16 / 9; border-radius: 22px; overflow: hidden; border: 1px solid rgba(255,255,255,0.14); background-color: #0A0F35; background-image: radial-gradient(rgba(148,163,184,0.22) 1px, transparent 1px), radial-gradient(ellipse at 30% 30%, rgba(59,130,246,0.35), transparent 60%), radial-gradient(ellipse at 80% 70%, rgba(168,85,247,0.35), transparent 60%); background-size: 16px 16px, 100% 100%, 100% 100%">
+<div aria-hidden="true" style="position: absolute; top: 0; bottom: 0; width: 120px; background: linear-gradient(90deg, rgba(167,139,250,0), rgba(167,139,250,0.18), rgba(167,139,250,0)); animation: sweep 7s linear infinite; pointer-events: none"></div>
+<div style="display:contents" v-for="r in V.worldRegions">
+<button type="button" @click="r.pick" :aria-pressed="r.pressed" :aria-label="r.aria" :style="r.style">
+<span style="font-weight: 800; font-size: 13px; line-height: 1.15">{{ r.name }}</span>
+<span style="display: flex; gap: 5px; flex-wrap: wrap; justify-content: center">
+<div style="display:contents" v-for="d in r.dots"><span :style="d.style"></span></div>
+</span>
+</button>
+</div>
+<span style="position: absolute; left: 12px; bottom: 10px; font-size: 11px; color: #CBD5E1; background: rgba(6,10,38,0.7); padding: 4px 9px; border-radius: 8px">Schematic map · click a region to filter stories</span>
+</div>
+<div style="display: flex; flex-wrap: wrap; align-items: center; gap: 10px; font-size: 14px; color: #B4C0DA">
+<span>Showing: <strong style="color: #F1F5F9">{{ V.regionLabel }}</strong></span>
+<div style="display:contents" v-if="V.hasRegionFilter">
+<button type="button" @click="V.clearRegion" style="min-height: 44px; padding: 0 16px; border-radius: 12px; border: 1px solid rgba(255,255,255,0.3); background: rgba(255,255,255,0.08); color: #FFFFFF; font-weight: 700; font-size: 14px; cursor: pointer">Show all regions</button>
+</div>
+</div>
+</div>
+
+<aside style="flex: 1 1 340px; min-width: 0; display: flex; flex-direction: column; gap: 12px">
+<div style="display:contents" v-if="V.worldIsToday">
+<h3 style="margin: 0; font-size: 12px; font-weight: 800; letter-spacing: 0.14em; text-transform: uppercase; color: #93C5FD; padding-bottom: 8px; border-bottom: 1px solid rgba(255,255,255,0.14)">World Today</h3>
+<div style="display:contents" v-if="V.worldEmpty">
+<p style="margin: 0; font-size: 14px; color: #B4C0DA">No stories for this filter yet.</p>
+</div>
+<div style="display:contents" v-for="w in V.worldToday">
+<article class="lift" style="border-radius: 16px; padding: 16px; background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.12); display: flex; flex-direction: column; gap: 8px">
+<div style="display: flex; flex-wrap: wrap; align-items: center; gap: 8px">
+<span :style="V.tBerita.tagStyle">News</span>
+<span style="display: inline-flex; align-items: center; gap: 6px; font-size: 12px; font-weight: 600; color: #CBD5E1"><span aria-hidden="true" :style="w.dot"></span>{{ w.catName }} · {{ w.regionName }}</span>
+</div>
+<h4 style="margin: 0; font-family: 'Sora', sans-serif; font-size: 16px; line-height: 1.35; font-weight: 700">{{ w.title }}</h4>
+<p style="margin: 0; font-size: 14px; line-height: 1.5; color: #CBD5E1">{{ w.body }}</p>
+<span style="font-size: 12px; color: #8E9BBF">{{ V.src }}</span>
+<div style="display:contents" v-if="w.relevant">
+<button type="button" @click="w.toggle" :aria-expanded="w.open" style="align-self: flex-start; min-height: 44px; padding: 0 16px; border-radius: 12px; border: none; background: linear-gradient(135deg, #2563EB, #7C3AED); color: #FFFFFF; font-weight: 700; font-size: 14px; cursor: pointer; box-shadow: 0 6px 20px rgba(99,102,241,0.4)">What does it mean for Indonesia?</button>
+<div style="display:contents" v-if="w.open">
+<div style="border-radius: 12px; padding: 12px 14px; background: rgba(59,130,246,0.14); border: 1px solid rgba(96,165,250,0.3); display: flex; flex-direction: column; gap: 6px; animation: rise .35s ease-out both">
+<span :style="V.tInsight.tagStyle">AI Insight</span>
+<p style="margin: 0; font-size: 14px; line-height: 1.5">{{ w.meaning }}</p>
+</div>
+</div>
+</div>
+</article>
+</div>
+</div>
+
+<div style="display:contents" v-if="V.worldIsCb">
+<h3 style="margin: 0; font-size: 12px; font-weight: 800; letter-spacing: 0.14em; text-transform: uppercase; color: #93C5FD; padding-bottom: 8px; border-bottom: 1px solid rgba(255,255,255,0.14)">Central Bank Watch</h3>
+<div style="border-radius: 14px; padding: 14px; background: rgba(59,130,246,0.14); border: 1px solid rgba(96,165,250,0.3); display: flex; flex-direction: column; gap: 6px">
+<span :style="V.tInsight.tagStyle">AI Insight</span>
+<p style="margin: 0; font-size: 14px; line-height: 1.5">Most of the central banks we track are holding. The major central banks still set the direction for capital flows into emerging markets.</p>
+</div>
+<div style="display:contents" v-for="b in V.cbList">
+<article class="lift" style="border-radius: 16px; padding: 14px 16px; background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.12); display: flex; flex-direction: column; gap: 6px">
+<div style="display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 8px">
+<span style="font-size: 16px; font-weight: 800">{{ b.name }} <span style="font-weight: 500; color: #B4C0DA">· {{ b.region }}</span></span>
+<span :style="b.pill">{{ b.arah }}</span>
+</div>
+<p style="margin: 0; font-size: 14px; line-height: 1.5; color: #CBD5E1"><strong style="color: #F1F5F9">The simple reason:</strong> {{ b.why }}</p>
+<span style="font-size: 12px; color: #8E9BBF">{{ V.src }}</span>
+</article>
+</div>
+</div>
+
+<div style="display:contents" v-if="V.worldIsReads">
+<h3 style="margin: 0; font-size: 12px; font-weight: 800; letter-spacing: 0.14em; text-transform: uppercase; color: #93C5FD; padding-bottom: 8px; border-bottom: 1px solid rgba(255,255,255,0.14)">Interesting Reads</h3>
+<div style="display:contents" v-for="i in V.reads">
+<article class="lift" style="border-radius: 16px; padding: 16px; background: linear-gradient(160deg, rgba(20,184,166,0.16), rgba(139,92,246,0.12)); border: 1px solid rgba(94,234,212,0.25); display: flex; flex-direction: column; gap: 8px">
+<span :style="V.tInspo.tagStyle">{{ i.kind }} · {{ i.place }}</span>
+<h4 style="margin: 0; font-family: 'Sora', sans-serif; font-size: 16px; line-height: 1.35; font-weight: 700">{{ i.title }}</h4>
+<p style="margin: 0; font-size: 14px; line-height: 1.5; color: #CBD5E1">{{ i.body }}</p>
+<span style="font-size: 12px; color: #8E9BBF">{{ V.src }}</span>
+</article>
+</div>
+</div>
+</aside>
+</div>
+</section>
+</div>
+
+<!-- ③ MSMEs -->
+<div style="display:contents" v-if="V.isUmkm">
+<section aria-labelledby="h-umkm" style="animation: rise .5s ease-out both">
+<div style="display: flex; flex-direction: column; gap: 6px; padding: 30px 0 16px">
+<span style="font-size: 12px; font-weight: 800; letter-spacing: 0.14em; text-transform: uppercase; color: #93C5FD">③ MSMEs (UMKM)</span>
+<h2 id="h-umkm" style="margin: 0; font-family: 'Sora', sans-serif; font-size: 44px; line-height: 1.1; font-weight: 800; background: linear-gradient(90deg, #FFFFFF, #93C5FD, #C4B5FD, #F9A8D4, #FFFFFF); background-size: 200% auto; -webkit-background-clip: text; background-clip: text; color: transparent; animation: shine 8s linear infinite">Which businesses are growing, and what do they need?</h2>
+<p style="margin: 0; font-size: 16px; line-height: 1.55; color: #B4C0DA; max-width: 760px">Categories come from the sources we track. Pick one to see its stories and an AI program idea.</p>
+</div>
+<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 12px">
+<div style="display:contents" v-for="c in V.umkmCats">
+<button type="button" class="lift" @click="c.pick" :aria-pressed="c.pressed" :style="c.style">
+<span style="display: flex; justify-content: space-between; align-items: center; gap: 8px; width: 100%">
+<span style="font-family: 'Sora', sans-serif; font-size: 17px; font-weight: 800">{{ c.name }}</span>
+<span :style="c.trendStyle">{{ c.trend }}</span>
+</span>
+<svg width="100%" height="44" viewBox="0 0 120 40" preserveAspectRatio="none" aria-hidden="true"><polyline :points="c.spark" fill="none" stroke="#C4B5FD" stroke-width="2.5" stroke-linejoin="round" stroke-linecap="round" vector-effect="non-scaling-stroke" stroke-dasharray="320" style="animation: draw 1.6s ease-out both"></polyline></svg>
+<span lang="id" style="font-size: 13px; line-height: 1.45; color: #CBD5E1; text-align: left">{{ c.line }}</span>
+</button>
+</div>
+</div>
+<p style="margin: 8px 0 0; font-size: 12px; color: #8E9BBF">Small line = trend in news volume (illustrative).</p>
+<div style="display: flex; flex-wrap: wrap; gap: 24px; padding-top: 18px">
+<div style="flex: 999 1 560px; min-width: 0; display: flex; flex-direction: column; gap: 12px">
+<h3 style="margin: 0; font-family: 'Sora', sans-serif; font-size: 26px; font-weight: 800">{{ V.um.name }}: what’s happening?</h3>
+<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 12px">
+<div style="display:contents" v-for="b in V.um.blocks">
+<article class="lift" style="border-radius: 16px; padding: 16px; background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.12); display: flex; flex-direction: column; gap: 8px">
+<span style="font-size: 11px; font-weight: 800; letter-spacing: 0.1em; text-transform: uppercase; color: #93C5FD">{{ b.label }}</span>
+<p lang="id" style="margin: 0; font-size: 15px; line-height: 1.5">{{ b.text }}</p>
+<span style="font-size: 12px; color: #8E9BBF">News summary · {{ V.src }}</span>
+</article>
+</div>
+</div>
+<article class="lift" style="border-radius: 18px; padding: 18px; background: linear-gradient(160deg, rgba(20,184,166,0.16), rgba(59,130,246,0.1)); border: 1px solid rgba(94,234,212,0.25); display: flex; flex-direction: column; gap: 8px">
+<span :style="V.tInspo.tagStyle">World Inspiration · {{ V.um.inspoPlace }}</span>
+<h4 style="margin: 0; font-family: 'Sora', sans-serif; font-size: 18px; line-height: 1.35; font-weight: 700">{{ V.um.inspoTitle }}</h4>
+<p style="margin: 0; font-size: 14px; line-height: 1.55; color: #CBD5E1">{{ V.um.inspoBody }}</p>
+<p style="margin: 0; font-size: 14px; line-height: 1.55; color: #FED7AA"><strong>What could be adapted:</strong> {{ V.um.inspoAdapt }}</p>
+</article>
+</div>
+<aside style="flex: 1 1 340px; min-width: 0">
+<div style="border-radius: 22px; padding: 2px; background: linear-gradient(135deg, #F59E0B, #EC4899, #8B5CF6); background-size: 200% 200%; animation: shine 6s ease-in-out infinite alternate">
+<div style="border-radius: 20px; padding: 22px; background: #0E1340; display: flex; flex-direction: column; gap: 12px">
+<span style="font-size: 12px; font-weight: 800; letter-spacing: 0.14em; text-transform: uppercase; color: #FDBA74">AI Program Idea</span>
+<span :style="V.tIde.tagStyle">Idea to Review</span>
+<h3 lang="id" style="margin: 0; font-family: 'Sora', sans-serif; font-size: 28px; line-height: 1.15; font-weight: 800">{{ V.um.ideaTitle }}</h3>
+<div style="border-radius: 12px; padding: 12px 14px; background: rgba(59,130,246,0.14); border: 1px solid rgba(96,165,250,0.3); display: flex; flex-direction: column; gap: 6px">
+<span :style="V.tInsight.tagStyle">AI Insight</span>
+<p lang="id" style="margin: 0; font-size: 14px; line-height: 1.5">{{ V.um.ideaWhy }}</p>
+</div>
+<span style="font-size: 14px; font-weight: 800">What the program includes:</span>
+<ol lang="id" style="margin: 0; padding-left: 20px; display: flex; flex-direction: column; gap: 6px; font-size: 15px; line-height: 1.45">
+<div style="display:contents" v-for="p in V.um.ideaParts"><li>{{ p.text }}</li></div>
+</ol>
+<button type="button" @click="V.toggleUmkmMore" :aria-expanded="V.umkmMore" style="align-self: flex-start; min-height: 44px; padding: 0 16px; border-radius: 12px; border: 1px solid rgba(255,255,255,0.3); background: rgba(255,255,255,0.08); color: #FFFFFF; font-weight: 700; font-size: 14px; cursor: pointer">{{ V.umkmMoreLabel }}</button>
+<div style="display:contents" v-if="V.umkmMore">
+<div lang="id" style="border-radius: 12px; padding: 12px 14px; background: rgba(255,255,255,0.06); font-size: 14px; line-height: 1.5; animation: rise .35s ease-out both">
+<p style="margin: 0"><strong>Perlu dicek:</strong> apakah sudah ada program serupa, siapa yang paling tepat menjalankan, dan apakah kendalanya juga terlihat di data, bukan hanya di berita.</p>
+</div>
+</div>
+</div>
+</div>
+</aside>
+</div>
+</section>
+</div>
+
+<!-- ④ PAYMENT SYSTEMS -->
+<div style="display:contents" v-if="V.isBayar">
+<section aria-labelledby="h-bayar" style="animation: rise .5s ease-out both">
+<div style="display: flex; flex-direction: column; gap: 6px; padding: 30px 0 16px">
+<span style="font-size: 12px; font-weight: 800; letter-spacing: 0.14em; text-transform: uppercase; color: #93C5FD">④ Payment Systems</span>
+<h2 id="h-bayar" style="margin: 0; font-family: 'Sora', sans-serif; font-size: 44px; line-height: 1.1; font-weight: 800; background: linear-gradient(90deg, #FFFFFF, #93C5FD, #C4B5FD, #F9A8D4, #FFFFFF); background-size: 200% auto; -webkit-background-clip: text; background-clip: text; color: transparent; animation: shine 8s linear infinite">The way we pay keeps changing.</h2>
+<p style="margin: 0; font-size: 16px; line-height: 1.55; color: #B4C0DA; max-width: 760px">Developments, innovation, fraud and cybersecurity. Public complaints are grouped so they’re easy to read.</p>
+</div>
+<div role="group" aria-label="Pick a scope" style="display: inline-flex; gap: 4px; padding: 4px; border-radius: 999px; background: rgba(255,255,255,0.07); border: 1px solid rgba(255,255,255,0.14)">
+<div style="display:contents" v-for="p in V.payScopes">
+<button type="button" @click="p.pick" :aria-pressed="p.pressed" :style="p.style">{{ p.name }}</button>
+</div>
+</div>
+<div style="display: flex; flex-wrap: wrap; gap: 24px; padding-top: 18px">
+<div :lang="V.payLang" style="flex: 999 1 560px; min-width: 0; display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 12px; align-content: start">
+<div style="display:contents" v-for="n in V.payNews">
+<article class="lift" style="position: relative; overflow: hidden; border-radius: 18px; padding: 18px; background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.12); display: flex; flex-direction: column; gap: 8px">
+<div aria-hidden="true" :style="n.glow"></div>
+<span lang="en" :style="V.tBerita.tagStyle">News · {{ n.cat }}</span>
+<h4 style="margin: 0; font-family: 'Sora', sans-serif; font-size: 17px; line-height: 1.35; font-weight: 700">{{ n.title }}</h4>
+<p style="margin: 0; font-size: 14px; line-height: 1.5; color: #CBD5E1">{{ n.body }}</p>
+<span lang="en" style="font-size: 12px; color: #8E9BBF">{{ V.src }}</span>
+</article>
+</div>
+</div>
+<aside style="flex: 1 1 320px; min-width: 0; display: flex; flex-direction: column; gap: 12px">
+<h3 style="margin: 0; font-size: 12px; font-weight: 800; letter-spacing: 0.14em; text-transform: uppercase; color: #93C5FD; padding-bottom: 8px; border-bottom: 1px solid rgba(255,255,255,0.14)">Public voice</h3>
+<div style="display:contents" v-for="b in V.payBars">
+<div style="display: flex; flex-direction: column; gap: 5px">
+<span style="font-size: 14px; font-weight: 600">{{ b.label }}</span>
+<div style="height: 10px; border-radius: 5px; background: rgba(255,255,255,0.08)"><div :style="`height: 10px; border-radius: 5px; background: linear-gradient(90deg, #F59E0B, #EC4899, #8B5CF6); transform-origin: left; animation: grow 1.1s ease-out both; ${b.w}`"></div></div>
+</div>
+</div>
+<p :lang="V.payLang" style="margin: 0; font-size: 15px; font-style: italic; line-height: 1.5; color: #E9D5FF">“{{ V.payQuote }}”</p>
+<div style="border-radius: 14px; padding: 14px; background: rgba(59,130,246,0.14); border: 1px solid rgba(96,165,250,0.3); display: flex; flex-direction: column; gap: 6px">
+<span :style="V.tInsight.tagStyle">AI Insight</span>
+<p :lang="V.payLang" style="margin: 0; font-size: 14px; line-height: 1.5">{{ V.payInsight }}</p>
+</div>
+</aside>
+</div>
+<div style="margin-top: 26px; position: relative; overflow: hidden; border-radius: 24px; padding: 24px; background: linear-gradient(135deg, #1E3A8A, #5B21B6 60%, #9D174D); display: flex; flex-direction: column; gap: 14px">
+<div aria-hidden="true" style="position: absolute; right: -80px; top: -80px; width: 260px; height: 260px; border-radius: 50%; border: 2px dashed rgba(255,255,255,0.25); animation: spin 36s linear infinite"></div>
+<div style="position: relative; display: flex; flex-direction: column; gap: 4px">
+<span style="font-size: 12px; font-weight: 800; letter-spacing: 0.14em; text-transform: uppercase; color: #FBCFE8">Innovation Corner</span>
+<h3 style="margin: 0; font-family: 'Sora', sans-serif; font-size: 26px; font-weight: 800">User problem → solution from elsewhere → study idea</h3>
+</div>
+<div style="display:contents" v-for="v in V.innov">
+<div style="position: relative; display: flex; flex-wrap: wrap; gap: 10px; align-items: stretch">
+<div style="flex: 1 1 220px; border-radius: 14px; padding: 14px; background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.18); display: flex; flex-direction: column; gap: 6px">
+<span style="font-size: 11px; font-weight: 800; letter-spacing: 0.1em; text-transform: uppercase; color: #FBCFE8">User problem</span>
+<p lang="id" style="margin: 0; font-size: 15px; line-height: 1.45">{{ v.problem }}</p>
+</div>
+<div style="flex: 1 1 220px; border-radius: 14px; padding: 14px; background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.18); display: flex; flex-direction: column; gap: 6px">
+<span style="font-size: 11px; font-weight: 800; letter-spacing: 0.1em; text-transform: uppercase; color: #99F6E4">Example from elsewhere</span>
+<p style="margin: 0; font-size: 15px; line-height: 1.45">{{ v.elsewhere }}</p>
+</div>
+<div style="flex: 1 1 220px; border-radius: 14px; padding: 14px; background: linear-gradient(135deg, #FDE68A, #FBCFE8); color: #1E1B4B; display: flex; flex-direction: column; gap: 6px">
+<span style="font-size: 11px; font-weight: 800; letter-spacing: 0.1em; text-transform: uppercase; color: #7C2D12">Idea to Review</span>
+<p lang="id" style="margin: 0; font-size: 15px; line-height: 1.45">{{ v.idea }}</p>
+</div>
+</div>
+</div>
+</div>
+</section>
+</div>
+
+<!-- ⑤ RUPIAH CIRCULATION -->
+<div style="display:contents" v-if="V.isRupiah">
+<section aria-labelledby="h-rupiah" style="animation: rise .5s ease-out both">
+<div style="display: flex; flex-direction: column; gap: 6px; padding: 30px 0 16px">
+<span style="font-size: 12px; font-weight: 800; letter-spacing: 0.14em; text-transform: uppercase; color: #93C5FD">⑤ Rupiah Circulation</span>
+<h2 id="h-rupiah" style="margin: 0; font-family: 'Sora', sans-serif; font-size: 44px; line-height: 1.1; font-weight: 800; background: linear-gradient(90deg, #FFFFFF, #93C5FD, #C4B5FD, #F9A8D4, #FFFFFF); background-size: 200% auto; -webkit-background-clip: text; background-clip: text; color: transparent; animation: shine 8s linear infinite">Is cash available and easy to get?</h2>
+<p style="margin: 0; font-size: 16px; line-height: 1.55; color: #B4C0DA; max-width: 760px">Reports on cash access, money exchange, damaged notes and seasonal demand. Click a region to see the stories.</p>
+</div>
+<div style="display: flex; flex-wrap: wrap; gap: 24px">
+<div style="flex: 999 1 560px; min-width: 0; display: flex; flex-direction: column; gap: 14px">
+<div role="group" aria-label="Pick a report type" style="display: flex; flex-wrap: wrap; gap: 8px">
+<div style="display:contents" v-for="c in V.rupLayers">
+<button type="button" @click="c.pick" :aria-pressed="c.pressed" :style="c.style">{{ c.name }}</button>
+</div>
+</div>
+<div style="position: relative; width: 100%; aspect-ratio: 16 / 9; border-radius: 22px; overflow: hidden; border: 1px solid rgba(255,255,255,0.14); background-color: #0A0F35; background-image: radial-gradient(rgba(148,163,184,0.22) 1px, transparent 1px), radial-gradient(ellipse at 25% 20%, rgba(59,130,246,0.35), transparent 60%), radial-gradient(ellipse at 85% 85%, rgba(139,92,246,0.35), transparent 60%); background-size: 16px 16px, 100% 100%, 100% 100%">
+<div aria-hidden="true" style="position: absolute; top: 0; bottom: 0; width: 120px; background: linear-gradient(90deg, rgba(34,211,238,0), rgba(34,211,238,0.16), rgba(34,211,238,0)); animation: sweep 6.5s linear infinite; pointer-events: none"></div>
+<div style="display:contents" v-for="r in V.rupRegions">
+<button type="button" @click="r.pick" :aria-pressed="r.pressed" :aria-label="r.aria" :style="r.style">
+<div style="display:contents" v-if="r.hasDot"><span aria-hidden="true" style="position: relative; width: 10px; height: 10px; flex: none"><span :style="r.ring"></span><span :style="r.dot"></span></span></div>
+<span style="font-weight: 800; font-size: 13px; line-height: 1.15">{{ r.short }}</span>
+<span style="font-size: 11px; font-weight: 600; opacity: 0.9">{{ r.sub }}</span>
+</button>
+</div>
+<span style="position: absolute; left: 12px; bottom: 10px; font-size: 11px; color: #CBD5E1; background: rgba(6,10,38,0.7); padding: 4px 9px; border-radius: 8px">More purple = more reports · dashed outline = no reports yet</span>
+</div>
+<p style="margin: 0; padding: 12px 16px; border-radius: 14px; background: rgba(251,191,36,0.12); border: 1px solid rgba(251,191,36,0.4); font-size: 14px; line-height: 1.5; color: #FDE68A">A news dot means something was reported. A region with no news isn’t necessarily problem-free.</p>
+<div style="border-radius: 20px; padding: 22px; background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.13); backdrop-filter: blur(14px); display: flex; flex-direction: column; gap: 12px">
+<h3 style="margin: 0; font-family: 'Sora', sans-serif; font-size: 28px; font-weight: 800">{{ V.rup.name }}</h3>
+<div style="display:contents" v-if="V.rup.empty">
+<p style="margin: 0; font-size: 15px; line-height: 1.5; color: #CBD5E1">No news from this region for the selected type yet. That could mean all is well, or that the media hasn’t covered it.</p>
+</div>
+<div style="display:contents" v-for="n in V.rup.stories">
+<article style="border-top: 1px solid rgba(255,255,255,0.1); padding-top: 12px; display: flex; flex-direction: column; gap: 6px">
+<div style="display: flex; flex-wrap: wrap; gap: 8px; align-items: center">
+<span :style="V.tBerita.tagStyle">News</span>
+<span style="font-size: 12px; font-weight: 800; color: #C4B5FD">{{ n.layer }}</span>
+</div>
+<h4 lang="id" style="margin: 0; font-family: 'Sora', sans-serif; font-size: 17px; line-height: 1.35; font-weight: 700">{{ n.title }}</h4>
+<span style="font-size: 12px; color: #8E9BBF">{{ V.src }}</span>
+</article>
+</div>
+</div>
+</div>
+<aside style="flex: 1 1 320px; min-width: 0; display: flex; flex-direction: column; gap: 12px">
+<h3 style="margin: 0; font-size: 12px; font-weight: 800; letter-spacing: 0.14em; text-transform: uppercase; color: #93C5FD; padding-bottom: 8px; border-bottom: 1px solid rgba(255,255,255,0.14)">Worth a closer look</h3>
+<div style="border-radius: 14px; padding: 14px; background: rgba(59,130,246,0.14); border: 1px solid rgba(96,165,250,0.3); display: flex; flex-direction: column; gap: 6px">
+<span :style="V.tInsight.tagStyle">AI Insight</span>
+<p lang="id" style="margin: 0; font-size: 14px; line-height: 1.5">Laporan soal akses uang tunai paling sering datang dari wilayah kepulauan dan daerah aliran sungai, terutama saat cuaca buruk.</p>
+</div>
+<div style="border-radius: 20px; padding: 2px; background: linear-gradient(135deg, #F59E0B, #EC4899, #8B5CF6)">
+<div lang="id" style="border-radius: 18px; padding: 16px; background: #0E1340; display: flex; flex-direction: column; gap: 8px">
+<span lang="en" :style="V.tIde.tagStyle">Idea to Review</span>
+<p style="margin: 0; font-size: 15px; line-height: 1.5"><strong>Layanan:</strong> jadwal kas keliling diumumkan lebih awal lewat radio lokal dan grup pesan warga, dengan jadwal cadangan saat cuaca buruk.</p>
+<p style="margin: 0; font-size: 15px; line-height: 1.5"><strong>Edukasi:</strong> panduan singkat menukar uang rusak setelah banjir, dibagikan bersama posko bencana.</p>
+</div>
+</div>
+</aside>
+</div>
+<div style="margin-top: 24px; display: flex; flex-direction: column; gap: 12px">
+<h3 style="margin: 0; font-size: 12px; font-weight: 800; letter-spacing: 0.14em; text-transform: uppercase; color: #93C5FD; padding-bottom: 8px; border-bottom: 1px solid rgba(255,255,255,0.14)">How cash reaches the public <span style="font-weight: 500; text-transform: none; letter-spacing: 0; color: #8E9BBF">· shown when data is available</span></h3>
+<div style="display: flex; flex-wrap: wrap; align-items: center; gap: 8px">
+<div class="lift" style="flex: 1 1 180px; border-radius: 16px; padding: 16px; background: linear-gradient(135deg, #2563EB, #4F46E5); font-size: 14px; line-height: 1.4"><strong style="display: block; font-size: 15px">Bank Indonesia</strong>Regional offices prepare and distribute cash</div>
+<svg width="22" height="22" viewBox="0 0 20 20" aria-hidden="true" style="animation: nudge 1.4s ease-in-out infinite"><path d="M7 4l6 6-6 6" fill="none" stroke="#C4B5FD" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+<div class="lift" style="flex: 1 1 180px; border-radius: 16px; padding: 16px; background: linear-gradient(135deg, #4F46E5, #7C3AED); font-size: 14px; line-height: 1.4"><strong style="display: block; font-size: 15px">Banks &amp; cash processors</strong>Deliver to branches and refill ATMs</div>
+<svg width="22" height="22" viewBox="0 0 20 20" aria-hidden="true" style="animation: nudge 1.4s ease-in-out infinite"><path d="M7 4l6 6-6 6" fill="none" stroke="#C4B5FD" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+<div class="lift" style="flex: 1 1 180px; border-radius: 16px; padding: 16px; background: linear-gradient(135deg, #7C3AED, #A21CAF); font-size: 14px; line-height: 1.4"><strong style="display: block; font-size: 15px">Service points</strong>ATMs, tellers, mobile cash services by land and boat</div>
+<svg width="22" height="22" viewBox="0 0 20 20" aria-hidden="true" style="animation: nudge 1.4s ease-in-out infinite"><path d="M7 4l6 6-6 6" fill="none" stroke="#C4B5FD" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+<div class="lift" style="flex: 1 1 180px; border-radius: 16px; padding: 16px; background: linear-gradient(135deg, #A21CAF, #DB2777); font-size: 14px; line-height: 1.4"><strong style="display: block; font-size: 15px">Public &amp; traders</strong>Withdraw cash, swap denominations, exchange damaged notes</div>
+</div>
+</div>
+</section>
+</div>
+
+<!-- ⑥ COMMUNICATION STUDIO -->
+<div style="display:contents" v-if="V.isStudio">
+<section aria-labelledby="h-studio" style="animation: rise .5s ease-out both">
+<div style="display: flex; flex-direction: column; gap: 6px; padding: 30px 0 16px">
+<span style="font-size: 12px; font-weight: 800; letter-spacing: 0.14em; text-transform: uppercase; color: #93C5FD">⑥ Communication Studio</span>
+<h2 id="h-studio" style="margin: 0; font-family: 'Sora', sans-serif; font-size: 44px; line-height: 1.1; font-weight: 800; background: linear-gradient(90deg, #FFFFFF, #93C5FD, #C4B5FD, #F9A8D4, #FFFFFF); background-size: 200% auto; -webkit-background-clip: text; background-clip: text; color: transparent; animation: shine 8s linear infinite">What do people need explained right now?</h2>
+<p style="margin: 0; font-size: 16px; line-height: 1.55; color: #B4C0DA; max-width: 760px">Material from the other five sections, turned into content ideas ready to discuss.</p>
+</div>
+<div style="display: flex; flex-wrap: wrap; gap: 24px">
+<div style="flex: 1 1 320px; min-width: 0; display: flex; flex-direction: column; gap: 10px">
+<h3 style="margin: 0; font-size: 12px; font-weight: 800; letter-spacing: 0.14em; text-transform: uppercase; color: #93C5FD; padding-bottom: 8px; border-bottom: 1px solid rgba(255,255,255,0.14)">What people are asking</h3>
+<div style="display:contents" v-for="q in V.questions">
+<button type="button" class="lift" @click="q.pick" :aria-pressed="q.pressed" :style="q.style">
+<span style="display: flex; flex-wrap: wrap; gap: 6px">
+<span style="font-size: 11px; font-weight: 800; letter-spacing: 0.06em; text-transform: uppercase; padding: 4px 9px; border-radius: 999px; background: rgba(96,165,250,0.2); color: #BFDBFE">from {{ q.from }}</span>
+<span style="font-size: 11px; font-weight: 800; letter-spacing: 0.06em; text-transform: uppercase; padding: 4px 9px; border-radius: 999px; background: rgba(244,114,182,0.2); color: #FBCFE8">{{ q.heat }}</span>
+</span>
+<span lang="id" style="font-family: 'Sora', sans-serif; font-size: 17px; line-height: 1.35; font-weight: 700; text-align: left">“{{ q.q }}”</span>
+</button>
+</div>
+<h3 style="margin: 16px 0 0; font-size: 12px; font-weight: 800; letter-spacing: 0.14em; text-transform: uppercase; color: #93C5FD; padding-bottom: 8px; border-bottom: 1px solid rgba(255,255,255,0.14)">Prepare before key moments</h3>
+<div style="display:contents" v-for="m in V.momentum">
+<div style="display: flex; gap: 12px; align-items: flex-start; padding: 10px 0; border-bottom: 1px solid rgba(255,255,255,0.08)">
+<span aria-hidden="true" style="flex: none; margin-top: 5px; width: 10px; height: 10px; border-radius: 50%; background: linear-gradient(135deg, #60A5FA, #C084FC); box-shadow: 0 0 10px #A78BFA"></span>
+<span style="display: flex; flex-direction: column; gap: 3px">
+<span style="font-size: 15px; font-weight: 800">{{ m.name }}</span>
+<span style="font-size: 14px; line-height: 1.45; color: #CBD5E1">{{ m.text }}</span>
+</span>
+</div>
+</div>
+</div>
+<div style="flex: 999 1 560px; min-width: 0; align-self: flex-start; border-radius: 24px; padding: 2px; background: linear-gradient(135deg, #3B82F6, #8B5CF6, #EC4899); background-size: 200% 200%; animation: shine 8s ease-in-out infinite alternate">
+<div style="border-radius: 22px; padding: 24px; background: #0E1340; display: flex; flex-direction: column; gap: 16px">
+<div style="display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 8px">
+<span style="font-size: 12px; font-weight: 800; letter-spacing: 0.14em; text-transform: uppercase; color: #93C5FD">Content idea</span>
+<span :style="V.tIde.tagStyle">Idea to Review</span>
+</div>
+<h3 lang="id" style="margin: 0; font-family: 'Sora', sans-serif; font-size: 32px; line-height: 1.15; font-weight: 800">{{ V.brief.ide }}</h3>
+<dl style="margin: 0; display: grid; grid-template-columns: minmax(110px, 160px) minmax(0, 1fr); gap: 10px 16px; font-size: 15px; line-height: 1.5">
+<dt style="font-weight: 700; color: #93C5FD">The question</dt><dd lang="id" style="margin: 0">“{{ V.brief.q }}”</dd>
+<dt style="font-weight: 700; color: #93C5FD">Key message</dt><dd lang="id" style="margin: 0">{{ V.brief.pesan }}</dd>
+<dt style="font-weight: 700; color: #93C5FD">Audience &amp; format</dt><dd lang="id" style="margin: 0">{{ V.brief.audiens }}</dd>
+<dt style="font-weight: 700; color: #93C5FD">Tone</dt><dd lang="id" style="margin: 0">{{ V.brief.tone }}</dd>
+<dt style="font-weight: 700; color: #93C5FD">Visual</dt><dd lang="id" style="margin: 0">{{ V.brief.visual }}</dd>
+</dl>
+<div style="border-radius: 16px; padding: 16px; background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); display: flex; flex-direction: column; gap: 12px">
+<div style="display: flex; flex-wrap: wrap; align-items: center; gap: 8px">
+<span :style="V.tInsight.tagStyle">AI Draft</span>
+<span style="font-size: 13px; color: #8E9BBF">review before using</span>
+</div>
+<div style="display: flex; flex-direction: column; gap: 6px">
+<span style="font-size: 13px; font-weight: 800">Title options</span>
+<div style="display:contents" v-for="t in V.brief.titles"><span lang="id" style="font-family: 'Sora', sans-serif; font-size: 16px; line-height: 1.4; font-weight: 600">· {{ t.text }}</span></div>
+</div>
+<div style="display: flex; flex-direction: column; gap: 6px">
+<span style="font-size: 13px; font-weight: 800">Storyline</span>
+<ol lang="id" style="margin: 0; padding-left: 20px; display: flex; flex-direction: column; gap: 4px; font-size: 15px; line-height: 1.45">
+<div style="display:contents" v-for="a in V.brief.alur"><li>{{ a.text }}</li></div>
+</ol>
+</div>
+<div style="display: flex; flex-direction: column; gap: 6px">
+<span style="font-size: 13px; font-weight: 800">Caption</span>
+<p lang="id" style="margin: 0; font-size: 15px; line-height: 1.5; border-radius: 12px; padding: 12px; background: rgba(139,92,246,0.12); border: 1px dashed rgba(196,181,253,0.45)">{{ V.brief.caption }}</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+</div>
+
+<footer style="margin-top: 44px; padding: 16px 20px; border-radius: 16px; background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); display: flex; flex-wrap: wrap; justify-content: space-between; gap: 8px; font-size: 13px; color: #B4C0DA">
+<span>Kabar Ekonomi · working name · personal study project, not an official Bank Indonesia product</span>
+<span>Key data from bi.go.id · section news and maps are still illustrative samples</span>
+</footer>
+
+</div>
+</div>
+</div>
+<script src="./petite-vue.iife.js"></script>
+<script>
+(function () {
+  var store = PetiteVue.reactive({ s: {} });
+  class DCLogic {
+    constructor(props) { this.props = props || {}; }
+    get state() { return store.s; }
+    set state(v) { store.s = v; }
+    setState(patch) { Object.assign(store.s, patch); }
+  }
+class Component extends DCLogic {
+  constructor(props) {
+    super(props);
+    this.state = {
+      tab: 'inflasi', infRegion: 'jawa', commodity: 'semua', infMore: false,
+      worldTab: 'today', worldCat: 'semua', worldRegion: null, openMeaning: 'w1',
+      umkmCat: 'kuliner', umkmMore: false, payScope: 'id',
+      rupLayer: 'semua', rupRegion: 'kalimantan', studioQ: 'q1'
+    };
+  }
+
+  renderVals() {
+    const s = this.state;
+    const SRC = '[Source] · [date]';
+
+    const TAGS = {
+      berita: ['rgba(255,255,255,0.12)', '#E2E8F0', 'rgba(255,255,255,0.22)'],
+      insight: ['rgba(96,165,250,0.2)', '#BFDBFE', 'rgba(147,197,253,0.4)'],
+      ide: ['rgba(251,146,60,0.2)', '#FED7AA', 'rgba(253,186,116,0.45)'],
+      inspirasi: ['rgba(45,212,191,0.18)', '#99F6E4', 'rgba(94,234,212,0.4)']
+    };
+    const tagStyle = (k) => 'display:inline-flex;align-self:flex-start;align-items:center;font-size:11px;font-weight:800;letter-spacing:0.06em;text-transform:uppercase;padding:4px 10px;border-radius:999px;background:' + TAGS[k][0] + ';color:' + TAGS[k][1] + ';border:1px solid ' + TAGS[k][2] + ';';
+    const chip = (on) => 'display:inline-flex;align-items:center;gap:8px;min-height:44px;padding:0 18px;border-radius:999px;font-size:14px;font-weight:700;cursor:pointer;transition:all .2s ease;' + (on
+      ? 'border:1px solid rgba(255,255,255,0.35);background:linear-gradient(135deg,#2563EB,#7C3AED);color:#FFFFFF;box-shadow:0 8px 24px rgba(99,102,241,0.45);'
+      : 'border:1px solid rgba(255,255,255,0.18);background:rgba(255,255,255,0.06);color:#E2E8F0;box-shadow:none;');
+    const gradCard = (on, pad) => 'display:flex;flex-direction:column;align-items:flex-start;gap:8px;padding:' + pad + ';border-radius:18px;cursor:pointer;text-align:left;color:#F1F5F9;' + (on
+      ? 'border:2px solid transparent;background:linear-gradient(#111744,#111744) padding-box,linear-gradient(135deg,#3B82F6,#8B5CF6,#EC4899) border-box;box-shadow:0 12px 34px rgba(124,58,237,0.4);'
+      : 'border:2px solid rgba(255,255,255,0.12);background:rgba(255,255,255,0.05);box-shadow:none;');
+
+    const ST = {
+      naik: { label: '▲ Up', word: 'up', fill: 'linear-gradient(135deg,rgba(251,146,60,0.55),rgba(236,72,153,0.45))', solid: 'rgba(251,146,60,0.2)', border: '#FB923C', text: '#FFF7ED', dot: '#FDBA74' },
+      turun: { label: '▼ Down', word: 'down', fill: 'linear-gradient(135deg,rgba(34,211,238,0.45),rgba(59,130,246,0.5))', solid: 'rgba(56,189,248,0.2)', border: '#38BDF8', text: '#F0F9FF', dot: '#7DD3FC' },
+      stabil: { label: '– Stable', word: 'stable', fill: 'rgba(148,163,184,0.22)', solid: 'rgba(148,163,184,0.2)', border: '#94A3B8', text: '#F1F5F9', dot: '#CBD5E1' }
+    };
+    const pill = (k) => 'display:inline-flex;align-items:center;align-self:flex-start;font-size:12px;font-weight:800;padding:3px 10px;border-radius:999px;background:' + ST[k].solid + ';color:' + ST[k].text + ';border:1px solid ' + ST[k].border + ';';
+
+    const regionStyle = (pos, fill, border, text, sel, dashed) =>
+      'position:absolute;' + pos + 'box-sizing:border-box;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;padding:4px;overflow:hidden;text-align:center;cursor:pointer;border-radius:28px;font-family:inherit;transition:transform .2s ease,box-shadow .2s ease;backdrop-filter:blur(4px);background:' + fill + ';color:' + text + ';border:' + (sel ? '2px solid #FFFFFF' : '1.5px ' + (dashed ? 'dashed ' : 'solid ') + border) + ';box-shadow:' + (sel ? '0 0 0 4px rgba(255,255,255,0.15),0 12px 34px rgba(124,58,237,0.6)' : 'none') + ';transform:' + (sel ? 'scale(1.04)' : 'none') + ';';
+    const pingStyle = (c, delay) => 'position:absolute;inset:0;border-radius:50%;background:' + c + ';animation:ping 1.8s ease-out infinite;animation-delay:' + delay + 's;';
+    const dotStyleSolid = (c) => 'position:absolute;inset:0;border-radius:50%;background:' + c + ';box-shadow:0 0 10px ' + c + ';';
+
+    // ---------- Key data (bi.go.id, checked 17 Nov 2026) ----------
+    const KPI = [
+      ['5.75%', 'BI-Rate', 'BI policy rate', '21 Oct 2026', '#3B82F6,#8B5CF6'],
+      ['3.28%', 'CPI Inflation (yoy)', 'Price rise vs a year ago', 'Sep 2026', '#EC4899,#F59E0B'],
+      ['2.5±1%', 'Inflation Target', 'This year’s inflation goal', '2026', '#14B8A6,#3B82F6'],
+      ['$146,765M', 'FX Reserves', 'BI’s foreign currency holdings', '30 Oct 2026', '#8B5CF6,#EC4899'],
+      ['Rp18,264', 'JISDOR (USD-IDR)', 'Reference rupiah–dollar rate', '17 Nov 2026', '#22D3EE,#6366F1'],
+      ['5.10498%', 'INDONIA', 'Average overnight interbank lending rate', '17 Nov 2026', '#F59E0B,#EF4444']
+    ];
+    const kpis = KPI.map(([value, label, hint, date, g]) => ({ value, label, hint, date,
+      bar: 'position:absolute;left:0;right:0;top:0;height:3px;background:linear-gradient(90deg,' + g + ');' }));
+    const TICK = [
+      ['BI-Rate', '5.75% (21 Oct 2026)', 'en'],
+      ['JISDOR', 'Rp18,264 per USD (17 Nov 2026)', 'en'],
+      ['CPI inflation', '3.28% yoy (Sep 2026), within the 2.5±1% target', 'en'],
+      ['INDONIA', '5.10498% (17 Nov 2026)', 'en'],
+      ['FX reserves', 'USD146,765 million (30 Oct 2026)', 'en'],
+      ['Payments', 'Kartu Kredit Indonesia kini diterbitkan 8 penyelenggara jasa pembayaran', 'id']
+    ];
+    const tickerLoop = TICK.concat(TICK).map(([k, v, lang]) => ({ k, v, lang }));
+
+    // ---------- Tabs ----------
+    const TABS = [
+      ['inflasi', '1', 'Inflation', 'Where are prices moving?', '#F59E0B,#EC4899'],
+      ['dunia', '2', 'FX & World', 'What’s happening out there?', '#3B82F6,#22D3EE'],
+      ['umkm', '3', 'MSMEs', 'Which businesses are growing?', '#10B981,#3B82F6'],
+      ['bayar', '4', 'Payment Systems', 'The way we pay keeps changing', '#8B5CF6,#EC4899'],
+      ['rupiah', '5', 'Rupiah Circulation', 'Is cash easy to get?', '#6366F1,#A855F7'],
+      ['studio', '6', 'Communication Studio', 'What needs explaining?', '#EC4899,#8B5CF6']
+    ];
+    const tabs = TABS.map(([id, num, name, q, g]) => {
+      const on = s.tab === id;
+      return {
+        num, name, q, pressed: on,
+        pick: () => this.setState({ tab: id }),
+        badge: 'flex:none;width:30px;height:30px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-family:Sora,sans-serif;font-size:14px;font-weight:800;color:#FFFFFF;background:linear-gradient(135deg,' + g + ');box-shadow:0 4px 14px rgba(0,0,0,0.3);',
+        style: 'display:flex;flex-direction:column;align-items:flex-start;gap:6px;text-align:left;padding:14px;min-height:84px;border-radius:18px;cursor:pointer;color:#F1F5F9;' + (on
+          ? 'border:2px solid transparent;background:linear-gradient(135deg,rgba(37,99,235,0.55),rgba(124,58,237,0.55)) padding-box,linear-gradient(135deg,#60A5FA,#C084FC,#F472B6) border-box;box-shadow:0 12px 34px rgba(99,102,241,0.45);'
+          : 'border:2px solid rgba(255,255,255,0.1);background:rgba(255,255,255,0.05);box-shadow:none;'),
+        qStyle: 'font-size:12px;line-height:1.35;color:' + (on ? '#E0E7FF' : '#B4C0DA') + ';'
+      };
+    });
+
+    // ---------- Indonesia geometry ----------
+    const GEO = [
+      ['sumatra', 'Sumatra', 'Sumatra', 'left:2%;top:6%;width:21%;height:56%;'],
+      ['kalimantan', 'Kalimantan', 'Kalimantan', 'left:28%;top:8%;width:19%;height:46%;'],
+      ['sulawesi', 'Sulawesi', 'Sulawesi', 'left:51%;top:14%;width:12%;height:48%;'],
+      ['maluku', 'Maluku', 'Maluku', 'left:66%;top:18%;width:9%;height:40%;'],
+      ['papua', 'Papua', 'Papua', 'left:77%;top:16%;width:21%;height:52%;'],
+      ['jawa', 'Java', 'Java', 'left:22%;top:71%;width:24%;height:16%;'],
+      ['nusra', 'Bali & Nusa Tenggara', 'Bali–Nusra', 'left:48%;top:75%;width:24%;height:14%;']
+    ];
+    const geoName = {};
+    GEO.forEach((g) => { geoName[g[0]] = g[1]; });
+
+    // ---------- ① Inflation (Indonesian news → Bahasa Indonesia) ----------
+    const COMMS = [['semua', 'All'], ['beras', 'Rice'], ['cabai', 'Chili'], ['telur', 'Eggs'], ['bawang', 'Shallots'], ['minyak', 'Cooking oil']];
+    const INF = {
+      sumatra: { n: 4, st: { beras: 'stabil', cabai: 'naik', telur: 'stabil', bawang: 'naik', minyak: 'stabil' },
+        news: [['Pasokan cabai dari sentra produksi tersendat setelah hujan deras', 'Jalan antarkabupaten sempat terputus, truk pengangkut tertahan beberapa hari.'], ['Pedagang mulai membatasi stok bawang merah', 'Kiriman dari luar pulau datang lebih jarang.']],
+        voice: 'Cabai di pasar dekat rumah tiba-tiba naik, katanya jalan ke sentra lagi putus.' },
+      jawa: { n: 6, st: { beras: 'naik', cabai: 'turun', telur: 'naik', bawang: 'stabil', minyak: 'stabil' },
+        news: [['Harga beras medium merangkak naik di pasar tradisional', 'Panen belum merata; gabah banyak terserap penggilingan besar.'], ['Telur mulai naik menjelang libur akhir tahun', 'Permintaan untuk hajatan dan usaha kue meningkat.'], ['Cabai justru turun karena panen di beberapa sentra', 'Pasokan melimpah, harga di tingkat petani tertekan.']],
+        voice: 'Beras yang biasa saya beli naik terus, sekarang pindah ke merek lain.' },
+      kalimantan: { n: 3, st: { beras: 'naik', cabai: 'naik', telur: 'stabil', bawang: 'stabil', minyak: 'turun' },
+        news: [['Kapal pengangkut bahan pangan tertahan cuaca', 'Barang dari Jawa terlambat masuk ke pasar kota.']],
+        voice: 'Barang di toko kosong dua hari, nunggu kapal datang.' },
+      sulawesi: { n: 2, st: { beras: 'stabil', cabai: 'turun', telur: 'stabil', bawang: 'naik', minyak: 'stabil' },
+        news: [['Sebagian petani bawang merah gagal panen', 'Serangan hama di beberapa sentra produksi.']],
+        voice: 'Bawang merah mahal, padahal biasanya kita yang kirim ke daerah lain.' },
+      nusra: { n: 2, st: { beras: 'stabil', cabai: 'naik', telur: 'stabil', bawang: 'stabil', minyak: 'naik' },
+        news: [['Arus wisatawan akhir tahun mendongkrak permintaan cabai', 'Hotel dan restoran menambah pembelian.']],
+        voice: 'Sambal di warung sekarang dikasih sedikit-sedikit.' },
+      maluku: { n: 3, st: { beras: 'naik', cabai: 'naik', telur: 'naik', bawang: 'stabil', minyak: 'stabil' },
+        news: [['Gelombang tinggi menunda pelayaran antarpulau', 'Pasokan ke pulau-pulau kecil makin jarang.']],
+        voice: 'Kalau ombak tinggi, telur bisa hilang dari pasar.' },
+      papua: { n: 2, st: { beras: 'naik', cabai: 'stabil', telur: 'naik', bawang: 'stabil', minyak: 'stabil' },
+        news: [['Ongkos angkut ke wilayah pegunungan naik', 'Biaya angkut udara ikut mendorong harga eceran.']],
+        voice: 'Harga di kampung beda jauh sama di kota, ongkos angkutnya mahal.' }
+    };
+    const dominant = (st) => {
+      const v = Object.values(st);
+      const up = v.filter((x) => x === 'naik').length;
+      const down = v.filter((x) => x === 'turun').length;
+      if (up >= 2) return 'naik';
+      if (down > up) return 'turun';
+      if (up) return 'naik';
+      return 'stabil';
+    };
+    const comms = COMMS.map(([id, name]) => ({ name, pressed: s.commodity === id, style: chip(s.commodity === id), pick: () => this.setState({ commodity: id }) }));
+    const infRegions = GEO.map(([id, name, short, pos], idx) => {
+      const d = INF[id];
+      const k = s.commodity === 'semua' ? dominant(d.st) : d.st[s.commodity];
+      const sel = s.infRegion === id;
+      return {
+        short, sub: d.n + ' reports', pressed: sel,
+        aria: name + ': ' + d.n + ' reports, prices ' + ST[k].word,
+        style: regionStyle(pos, ST[k].fill, ST[k].border, ST[k].text, sel, false),
+        ring: pingStyle(ST[k].dot, (idx * 0.25).toFixed(2)), dot: dotStyleSolid(ST[k].dot),
+        pick: () => this.setState({ infRegion: id })
+      };
+    });
+    const sel = INF[s.infRegion];
+    const inf = {
+      name: geoName[s.infRegion], n: sel.n, voice: sel.voice,
+      comms: COMMS.slice(1).map(([id, name]) => {
+        const k = sel.st[id];
+        const hi = s.commodity === id;
+        return { name, label: ST[k].label, pill: pill(k),
+          rowStyle: 'display:flex;flex-direction:column;gap:6px;padding:10px 12px;border-radius:12px;background:' + (hi ? 'rgba(139,92,246,0.22)' : 'rgba(255,255,255,0.05)') + ';border:' + (hi ? '2px solid #C4B5FD' : '1px solid rgba(255,255,255,0.1)') + ';' };
+      }),
+      news: sel.news.map(([title, cause]) => ({ title, cause }))
+    };
+    const commodityName = s.commodity === 'semua' ? 'all commodities' : COMMS.find((c) => c[0] === s.commodity)[1].toLowerCase();
+    const ramaiInf = [
+      ['Harga beras jadi sorotan di beberapa kota besar', 'Pedagang menyebut pasokan dari penggilingan berkurang.'],
+      ['Cuaca ekstrem mengganggu distribusi pangan antarpulau', 'Beberapa jadwal kapal barang mundur.'],
+      ['Pemerintah daerah gelar pasar murah jelang libur akhir tahun', 'Fokusnya beras, telur, dan minyak goreng.']
+    ].map(([title, body]) => ({ title, body }));
+    const voiceInf = [['Prices too high', 72], ['Worried prices will rise again', 46], ['Hard-to-find goods', 24]].map(([label, w]) => ({ label, w: 'width:' + w + '%;' }));
+    const inspoInf = [
+      { place: 'South Asia', title: 'Buffer stocks for commodities prone to price spikes', body: 'The government holds reserves and releases them when prices jump, on a published schedule.', adapt: 'Open communication about when and where reserves are released, so people don’t panic-buy.' },
+      { place: 'Europe', title: 'A “my personal inflation” calculator', body: 'People enter their own spending pattern and see their personal inflation rate, not just the national average.', adapt: 'A simple tool to answer “why do prices feel higher than the inflation number?”' }
+    ];
+
+    // ---------- ② FX & World (foreign news → English) ----------
+    const CAT = { konflik: ['Conflict', '#F472B6'], bunga: ['Interest rates', '#60A5FA'], dagang: ['Trade', '#FBBF24'], cerita: ['Interesting stories', '#2DD4BF'] };
+    const dotStyle = (c) => 'display:inline-block;width:10px;height:10px;border-radius:50%;background:' + CAT[c][1] + ';box-shadow:0 0 10px ' + CAT[c][1] + ';';
+    const WGEO = [
+      ['amut', 'North America', 'left:3%;top:8%;width:23%;height:32%;'],
+      ['amsel', 'South America', 'left:15%;top:48%;width:13%;height:42%;'],
+      ['eropa', 'Europe', 'left:38%;top:6%;width:16%;height:26%;'],
+      ['afrika', 'Africa', 'left:39%;top:37%;width:16%;height:48%;'],
+      ['timteng', 'Middle East', 'left:56.5%;top:30%;width:10%;height:20%;'],
+      ['asselatan', 'South Asia', 'left:67.5%;top:38%;width:8.5%;height:22%;'],
+      ['astim', 'East Asia', 'left:70%;top:6%;width:18%;height:28%;'],
+      ['asean', 'ASEAN', 'left:77%;top:44%;width:13%;height:22%;'],
+      ['oseania', 'Oceania', 'left:82%;top:70%;width:15%;height:22%;']
+    ];
+    const wName = {};
+    WGEO.forEach((g) => { wName[g[0]] = g[1]; });
+    const W = [
+      { id: 'w1', r: 'timteng', c: 'konflik', title: 'Shipping-lane tensions push container freight costs higher', body: 'Many vessels are rerouting, so voyages take longer.', meaning: 'Import costs could rise and feed into prices at home. If investors turn more risk-averse, the rupiah could also come under pressure.' },
+      { id: 'w2', r: 'amut', c: 'bunga', title: 'A major central bank signals no rush to cut rates', body: 'Markets push back their expectations of rate cuts.', meaning: 'The yield gap with dollar assets stays wide, so foreign money tends to stay there. Pressure on the rupiah could last longer.' },
+      { id: 'w3', r: 'astim', c: 'dagang', title: 'New tariffs announced on steel and solar panels', body: 'Trading partners are preparing to retaliate.', meaning: 'Goods blocked from their target markets may be redirected to Southeast Asia. Cheaper inputs are possible, but local industry could be squeezed.' },
+      { id: 'w4', r: 'asselatan', c: 'dagang', title: 'Rice export restrictions extended', body: 'Global rice supply gets tighter.', meaning: 'Imported rice could get pricier. Relevant for keeping domestic rice stocks and prices steady.' },
+      { id: 'w5', r: 'amsel', c: 'dagang', title: 'Large soybean harvest expected to weigh on world prices', body: 'Global stocks are expected to loosen.', meaning: 'Inputs for tofu and tempeh could get cheaper, as long as the rupiah holds steady.' },
+      { id: 'w6', r: 'asean', c: 'bunga', title: 'Several regional central banks hold rates', body: 'They are waiting for the major central banks to move first.', meaning: 'The region is moving cautiously. Rupiah moves are best read alongside neighbouring currencies.' },
+      { id: 'w7', r: 'eropa', c: 'cerita', title: 'Small city tests a transit card that doubles as a digital wallet', body: 'One card for buses, cafés and parking.', meaning: null },
+      { id: 'w8', r: 'afrika', c: 'cerita', title: 'SMS-based mobile money is still a lifeline in many villages', body: 'No smartphone needed to send and receive money.', meaning: null },
+      { id: 'w9', r: 'oseania', c: 'cerita', title: 'Central bank writes its decision summaries in everyday language', body: 'A one-page version for the public, separate from the technical documents.', meaning: 'A possible model for making policy communication easier to understand.' }
+    ];
+    const worldTabs = [['today', 'World Today'], ['cb', 'Central Bank Watch'], ['reads', 'Interesting Reads']].map(([id, name]) => ({ name, pressed: s.worldTab === id, style: chip(s.worldTab === id), pick: () => this.setState({ worldTab: id }) }));
+    const worldCats = ['semua', 'konflik', 'bunga', 'dagang', 'cerita'].map((id) => {
+      const on = s.worldCat === id;
+      return { name: id === 'semua' ? 'All' : CAT[id][0], pressed: on, style: chip(on),
+        dot: id === 'semua' ? 'display:none;' : dotStyle(id),
+        pick: () => this.setState({ worldCat: id, worldTab: 'today' }) };
+    });
+    const catOk = (w) => s.worldCat === 'semua' || w.c === s.worldCat;
+    const worldRegions = WGEO.map(([id, name, pos]) => {
+      const items = W.filter((w) => w.r === id && catOk(w));
+      const on = s.worldRegion === id;
+      const has = items.length > 0;
+      return {
+        name, pressed: on,
+        aria: name + ': ' + items.length + (items.length === 1 ? ' story' : ' stories'),
+        dots: items.map((w) => ({ style: dotStyle(w.c) })),
+        style: regionStyle(pos, has ? 'linear-gradient(135deg,rgba(96,165,250,0.28),rgba(167,139,250,0.28))' : 'rgba(255,255,255,0.04)', has ? 'rgba(191,219,254,0.6)' : 'rgba(148,163,184,0.5)', '#F1F5F9', on, !has),
+        pick: () => this.setState({ worldRegion: on ? null : id, worldTab: 'today' })
+      };
+    });
+    const worldToday = W.filter((w) => catOk(w) && (!s.worldRegion || w.r === s.worldRegion)).map((w) => {
+      const open = s.openMeaning === w.id;
+      return {
+        title: w.title, body: w.body, meaning: w.meaning || '', relevant: !!w.meaning, open,
+        catName: CAT[w.c][0], regionName: wName[w.r], dot: dotStyle(w.c),
+        toggle: () => this.setState({ openMeaning: open ? null : w.id })
+      };
+    });
+    const ARAH = { naik: ['▲ Hiking', 'naik'], turun: ['▼ Cutting', 'turun'], tahan: ['– Holding', 'stabil'] };
+    const cbList = [
+      ['Central Bank A', 'North America', 'tahan', 'Services inflation is still high and the labour market is strong.'],
+      ['Central Bank B', 'Europe', 'turun', 'Growth is slowing and inflation is close to target.'],
+      ['Central Bank C', 'East Asia', 'naik', 'Its currency has weakened sharply, making imports pricier.'],
+      ['Central Bank D', 'ASEAN', 'tahan', 'Waiting to see the effect of earlier decisions.'],
+      ['Central Bank E', 'Oceania', 'tahan', 'Household spending is softening, but inflation hasn’t eased yet.']
+    ].map(([name, region, a, why]) => ({ name, region, why, arah: ARAH[a][0], pill: pill(ARAH[a][1]) }));
+    const reads = [
+      { kind: 'Policy experiment', place: 'East Africa', title: 'Direct cash transfers to village households', body: 'Researchers compared villages that received transfers with those that didn’t. Spending went up, while local market prices stayed relatively stable.' },
+      { kind: 'Interesting practice', place: 'Oceania', title: 'Central bank decision summaries in everyday language', body: 'Alongside the technical documents, there is a one-page version for the public.' },
+      { kind: 'Fun fact', place: 'Africa', title: 'Sending money by SMS, no app needed', body: 'In many villages, a basic phone is enough to save and pay.' }
+    ];
+
+    // ---------- ③ MSMEs (Indonesian news → Bahasa Indonesia; foreign inspiration → English) ----------
+    const UM = {
+      kuliner: { name: 'Food & beverage', trend: 'Hot', sp: [8, 10, 9, 13, 15, 18, 22], line: 'Frozen food rumahan dan sambal kemasan ramai dijual online.',
+        blocks: ['Frozen food rumahan dan sambal kemasan makin banyak dijual online.', 'Pembeli cari porsi kecil dan harga terjangkau; ulasan jadi penentu.', 'Usaha sambal rumahan di kota menengah menembus pembeli luar pulau lewat marketplace.', 'Paket hampers dan oleh-oleh untuk libur akhir tahun.', 'Sudah masuk marketplace, tapi pembeli jarang kembali.'],
+        idea: 'Klinik Repeat Order', why: 'Banyak berita menyebut usaha kuliner sudah masuk marketplace, tetapi kesulitan mendapat pembelian ulang.',
+        parts: ['Pendampingan menyusun database pelanggan sederhana', 'Layanan purnajual: tanya kepuasan, tawarkan penukaran', 'Paket langganan mingguan atau bulanan'],
+        ip: 'Thailand', it: 'One Tambon One Product (OTOP)', ib: 'Each district is encouraged to develop a signature product, with shared quality curation and labelling.', ia: 'Shared labels and curation for regional food products.' },
+      fesyen: { name: 'Fashion', trend: 'Growing', sp: [10, 11, 10, 12, 14, 15, 17], line: 'Wastra daerah dipadukan dengan potongan modern.',
+        blocks: ['Wastra daerah dipadukan dengan potongan modern untuk anak muda.', 'Pembeli makin peduli cerita di balik produk dan bahan ramah lingkungan.', 'Perajin tenun bekerja sama dengan desainer muda dan berjualan lewat live shopping.', 'Seragam komunitas dan merchandise acara.', 'Ukuran tidak standar bikin barang sering dikembalikan.'],
+        idea: 'Standar Ukuran & Foto Produk Bersama', why: 'Keluhan retur karena ukuran berulang di banyak berita fesyen daerah.',
+        parts: ['Template tabel ukuran untuk perajin', 'Sesi foto produk bersama per sentra', 'Panduan menulis deskripsi produk yang jujur'],
+        ip: 'Japan', it: 'One Village One Product (Oita)', ib: 'A village movement to develop one local signature product that residents are proud of.', ia: 'Make the product’s origin story part of the packaging and photos.' },
+      kriya: { name: 'Crafts', trend: 'Emerging', sp: [9, 9, 10, 10, 12, 12, 14], line: 'Dekorasi rumah dari bahan alam diminati pembeli luar negeri.',
+        blocks: ['Dekorasi rumah dari bahan alam laku di pasar ekspor skala kecil.', 'Pembeli luar negeri minta bukti asal bahan dan proses pembuatan.', 'Perajin anyaman menerima pesanan luar negeri lewat agregator.', 'Suvenir untuk acara internasional dan hotel.', 'Ongkos kirim internasional mahal dan pembayaran lintas negara ribet.'],
+        idea: 'Pojok Ekspor Kecil', why: 'Kendala ongkos kirim dan pembayaran lintas negara sering muncul bersamaan di berita kriya.',
+        parts: ['Konsolidasi pengiriman beberapa UMKM sekaligus', 'Pendampingan menerima pembayaran lintas negara', 'Katalog digital bersama per sentra'],
+        ip: '[Country]', it: 'Consolidated shipping for small exporters', ib: 'The postal service offers export packages at special rates for small businesses.', ia: 'Logistics partnerships for craft clusters.' },
+      jasa: { name: 'Services', trend: 'Stable', sp: [12, 12, 13, 12, 13, 14, 14], line: 'Jasa perawatan rumah dan cuci sepatu menjamur.',
+        blocks: ['Jasa perawatan rumah dan cuci sepatu menjamur di kota menengah.', 'Pelanggan mau pesan lewat chat dan bayar nontunai.', 'Usaha laundry kiloan beralih ke jemput-antar dan bayar pakai QR.', 'Layanan langganan bulanan untuk perumahan baru.', 'Pencatatan keuangan masih campur dengan uang pribadi.'],
+        idea: 'Kelas Pisah Kantong', why: 'Banyak usaha jasa tidak tahu untung sebenarnya karena uang usaha dan pribadi tercampur.',
+        parts: ['Rekening usaha yang terpisah', 'Catatan transaksi otomatis dari pembayaran QRIS', 'Laporan sederhana untuk syarat pembiayaan'],
+        ip: '[Country]', it: 'Free bookkeeping from payment apps', ib: 'Cashless transaction history automatically becomes the business’s financial records.', ia: 'QRIS transaction summaries as downloadable business records.' },
+      digital: { name: 'Digital business', trend: 'Hot', sp: [6, 8, 11, 12, 15, 17, 21], line: 'Kreator kecil jual template, kelas online, jasa desain.',
+        blocks: ['Kreator kecil menjual template, kelas online, dan jasa desain.', 'Pembeli lebih suka langganan bulanan ketimbang beli putus.', 'Penjual template undangan digital dari kota kecil menjangkau pembeli se-Indonesia.', 'Kelas keterampilan singkat untuk sesama pelaku usaha.', 'Pembayaran berulang dan perlindungan karya masih jadi pertanyaan.'],
+        idea: 'Panduan Bisnis Langganan', why: 'Pertanyaan soal pembayaran berulang muncul berkali-kali di komunitas kreator.',
+        parts: ['Pilihan cara menerima pembayaran berulang', 'Dasar perlindungan karya digital', 'Contoh struktur harga paket'],
+        ip: '[Country]', it: 'Creator incubator at the city library', ib: 'A public space offers tools, classes and business advice for creators.', ia: 'Creator business classes in existing public spaces.' }
+    };
+    const BL = ['Product trends', 'Consumer shifts', 'Regional stories', 'Market opportunities', 'Recurring obstacles'];
+    const TREND = { 'Hot': ['rgba(251,146,60,0.22)', '#FED7AA'], 'Growing': ['rgba(96,165,250,0.22)', '#BFDBFE'], 'Emerging': ['rgba(45,212,191,0.22)', '#99F6E4'], 'Stable': ['rgba(148,163,184,0.22)', '#E2E8F0'] };
+    const umkmCats = Object.keys(UM).map((id) => {
+      const u = UM[id];
+      const on = s.umkmCat === id;
+      const pts = u.sp.map((v, i) => (i * 20) + ',' + (38 - v * 1.5)).join(' ');
+      return {
+        name: u.name, trend: u.trend, line: u.line, spark: pts, pressed: on,
+        trendStyle: 'font-size:11px;font-weight:800;padding:3px 9px;border-radius:999px;white-space:nowrap;background:' + TREND[u.trend][0] + ';color:' + TREND[u.trend][1] + ';',
+        style: gradCard(on, '16px'),
+        pick: () => this.setState({ umkmCat: id, umkmMore: false })
+      };
+    });
+    const u = UM[s.umkmCat];
+    const um = {
+      name: u.name,
+      blocks: u.blocks.map((text, i) => ({ label: BL[i], text })),
+      ideaTitle: u.idea, ideaWhy: u.why, ideaParts: u.parts.map((text) => ({ text })),
+      inspoPlace: u.ip, inspoTitle: u.it, inspoBody: u.ib, inspoAdapt: u.ia
+    };
+
+    // ---------- ④ Payment Systems (Indonesia → Bahasa Indonesia; World → English) ----------
+    const PAY = {
+      id: {
+        news: [['Development', 'Pembayaran QR makin sering dipakai di pasar tradisional', 'Pedagang sayur dan jajanan mulai menempel kode QR di lapak.'], ['Innovation', 'Bayar tanpa sentuh pakai ponsel diuji di transportasi kota', 'Penumpang cukup menempelkan ponsel di gerbang.'], ['Fraud', 'Modus file undangan palsu kembali ramai', 'File yang dikirim lewat chat ternyata aplikasi pencuri data.'], ['Cybersecurity', 'Lembaga keuangan diminta memperkuat pengamanan aplikasi', 'Fokus pada verifikasi perangkat dan notifikasi transaksi.']],
+        bars: [78, 34, 22, 61, 47],
+        quote: 'Saldo sudah kepotong tapi status transaksinya gagal, refund-nya entah kapan.',
+        insight: 'Keluhan transaksi gagal dan keamanan sering muncul bersamaan: pengguna yang uangnya “nyangkut” lebih mudah termakan penipuan berkedok refund.'
+      },
+      dunia: {
+        news: [['Development', 'Cross-border QR payments expand across Southeast Asia', 'Tourists can pay with apps from their home country.'], ['Innovation', 'Central bank digital currency pilots enter a new phase', 'Several countries are testing them for interbank transactions.'], ['Fraud', 'AI voice clones used to demand emergency transfers', 'Scammers imitate family members’ voices over the phone.'], ['Cybersecurity', 'Cloud provider outage takes several payment apps offline', 'Services recovered after a few hours.']],
+        bars: [40, 52, 18, 70, 30],
+        quote: 'I got a call from a voice that sounded exactly like my son, asking for an emergency transfer.',
+        insight: 'Fraud is getting more sophisticated with AI, so checking the recipient before a transfer has become a common topic for regulators in many countries.'
+      }
+    };
+    const P = PAY[s.payScope];
+    const payScopes = [['id', 'Indonesia'], ['dunia', 'World']].map(([id, name]) => {
+      const on = s.payScope === id;
+      return { name, pressed: on, pick: () => this.setState({ payScope: id }),
+        style: 'min-height:44px;min-width:120px;padding:0 20px;border-radius:999px;border:none;cursor:pointer;font-size:15px;font-weight:800;transition:all .2s ease;background:' + (on ? 'linear-gradient(135deg,#2563EB,#7C3AED)' : 'transparent') + ';color:' + (on ? '#FFFFFF' : '#CBD5E1') + ';box-shadow:' + (on ? '0 6px 20px rgba(99,102,241,0.45)' : 'none') + ';' };
+    });
+    const GLOW = { 'Development': '#3B82F6', 'Innovation': '#8B5CF6', 'Fraud': '#EC4899', 'Cybersecurity': '#22D3EE' };
+    const payNews = P.news.map(([cat, title, body]) => ({ cat, title, body,
+      glow: 'position:absolute;right:-40px;top:-40px;width:140px;height:140px;border-radius:50%;background:' + GLOW[cat] + ';filter:blur(40px);opacity:0.45;pointer-events:none;' }));
+    const payBars = ['Failed transactions', 'Fees', 'Ease of use', 'Security', 'Complaint handling'].map((label, i) => ({ label, w: 'width:' + P.bars[i] + '%;' }));
+    const innov = [
+      { problem: 'Saldo terpotong tapi transaksi gagal, uangnya lama kembali.', elsewhere: 'In some countries, money from failed transactions must be refunded automatically within a set time, and users can track the status.', idea: 'Kaji standar waktu pengembalian dana dan pelacak status yang seragam.' },
+      { problem: 'Takut salah kirim atau tertipu saat transfer ke rekening baru.', elsewhere: 'Some countries show whether the recipient’s name matches, plus a risk warning, before the transfer goes through.', idea: 'Kaji peringatan risiko yang sama di semua aplikasi sebelum transfer ke penerima baru.' }
+    ];
+
+    // ---------- ⑤ Rupiah Circulation (Indonesian news → Bahasa Indonesia) ----------
+    const LAYERS = [['semua', 'All reports'], ['akses', 'Cash access'], ['tukar', 'Money exchange'], ['rusak', 'Damaged/worn notes'], ['musiman', 'Seasonal demand']];
+    const layerName = {};
+    LAYERS.forEach((l) => { layerName[l[0]] = l[1]; });
+    const RUP = {
+      sumatra: [['tukar', 'Antrean penukaran uang pecahan kecil di kota besar menjelang akhir tahun'], ['akses', 'Warga desa di pedalaman harus ke kecamatan untuk tarik tunai'], ['musiman', 'Kebutuhan uang tunai naik saat musim panen sawit']],
+      jawa: [['tukar', 'Layanan penukaran keliling ramai di alun-alun'], ['musiman', 'Permintaan uang baru naik jelang libur Natal dan Tahun Baru'], ['rusak', 'Pedagang pasar mengeluhkan uang lusuh yang susah dipakai belanja']],
+      kalimantan: [['akses', 'Warga di daerah aliran sungai bergantung pada kas keliling dengan kapal'], ['akses', 'ATM di kecamatan sering kosong di akhir pekan'], ['musiman', 'Kebutuhan tunai naik saat pembayaran hasil kebun']],
+      sulawesi: [['rusak', 'Uang rusak terkena banjir, warga bertanya cara menukarnya']],
+      nusra: [['akses', 'ATM di pulau kecil cepat kosong saat musim wisata'], ['tukar', 'Pelaku wisata butuh pecahan kecil untuk kembalian']],
+      maluku: [['akses', 'Jadwal kapal kas keliling bergantung pada cuaca'], ['rusak', 'Uang lembap dan rusak karena disimpan di rumah dekat laut']],
+      papua: []
+    };
+    const SEQ = [
+      ['rgba(255,255,255,0.03)', 'rgba(148,163,184,0.55)', '#CBD5E1', '#94A3B8'],
+      ['rgba(59,130,246,0.32)', '#60A5FA', '#F1F5F9', '#93C5FD'],
+      ['linear-gradient(135deg,rgba(79,70,229,0.55),rgba(139,92,246,0.5))', '#A5B4FC', '#FFFFFF', '#C4B5FD'],
+      ['linear-gradient(135deg,rgba(139,92,246,0.75),rgba(217,70,239,0.6))', '#E9D5FF', '#FFFFFF', '#F0ABFC']
+    ];
+    const layerOk = (x) => s.rupLayer === 'semua' || x[0] === s.rupLayer;
+    const rupLayers = LAYERS.map(([id, name]) => ({ name, pressed: s.rupLayer === id, style: chip(s.rupLayer === id), pick: () => this.setState({ rupLayer: id }) }));
+    const rupRegions = GEO.map(([id, name, short, pos], idx) => {
+      const n = RUP[id].filter(layerOk).length;
+      const c = SEQ[Math.min(n, 3)];
+      const on = s.rupRegion === id;
+      return {
+        short, sub: n ? n + (n === 1 ? ' report' : ' reports') : 'No reports yet', pressed: on, hasDot: n > 0,
+        aria: name + ': ' + (n ? n + (n === 1 ? ' report' : ' reports') : 'no reports yet'),
+        style: regionStyle(pos, c[0], c[1], c[2], on, n === 0),
+        ring: pingStyle(c[3], (idx * 0.3).toFixed(2)), dot: dotStyleSolid(c[3]),
+        pick: () => this.setState({ rupRegion: id })
+      };
+    });
+    const rs = RUP[s.rupRegion].filter(layerOk);
+    const rup = { name: geoName[s.rupRegion], empty: rs.length === 0, stories: rs.map(([l, title]) => ({ layer: layerName[l], title })) };
+
+    // ---------- ⑥ Communication Studio (Indonesian audience → content in Bahasa Indonesia) ----------
+    const Q = {
+      q1: { from: 'Inflation', heat: 'Rising', q: 'Kenapa inflasi turun, tetapi belanja masih terasa mahal?',
+        ide: '“Inflasi Turun, Kok Harga Belum Turun?”',
+        pesan: 'Penurunan inflasi berarti kenaikan harga melambat; harga tidak otomatis turun.',
+        audiens: 'Masyarakat umum; carousel atau video pendek.',
+        tone: 'Empatik, sederhana, mengakui pengalaman sehari-hari.',
+        visual: 'Speedometer yang melambat, di samping grafik garis yang tetap naik tapi lebih landai.',
+        titles: ['Inflasi Turun, Kok Harga Belum Turun?', 'Harga Naiknya Melambat, Bukan Berhenti', 'Kenapa Dompet Masih Terasa Tipis?'],
+        alur: ['Buka dengan pengalaman: “Belanja mingguan kok tetap mahal?”', 'Analogi: mobil yang melambat tetap bergerak maju', 'Bedakan “harga” dan “kenaikan harga”', 'Apa yang dilakukan untuk menjaga harga, ditutup tips belanja cerdas'],
+        caption: 'Inflasi turun bukan berarti harga kembali seperti tahun lalu. Artinya, harga naiknya lebih pelan. Geser untuk lihat penjelasan singkatnya.' },
+      q2: { from: 'Payment Systems', heat: 'Trending', q: 'File undangan di WhatsApp itu aman dibuka nggak?',
+        ide: '“Undangan Kok Minta Di-install?”',
+        pesan: 'Jangan pasang aplikasi dari file kiriman chat. Undangan asli cukup dibaca, tidak perlu di-install.',
+        audiens: 'Pengguna ponsel umum, termasuk orang tua; video pendek dan stiker WhatsApp.',
+        tone: 'Tenang, praktis, tidak menakut-nakuti.',
+        visual: 'Tampilan chat dengan file mencurigakan yang dilingkari.',
+        titles: ['Undangan Kok Minta Di-install?', '3 Tanda File Undangan Palsu', 'Sebelum Klik, Cek Dulu'],
+        alur: ['Adegan: seorang ibu menerima “undangan” dari nomor tak dikenal', 'Tunjukkan tanda bahayanya: file yang minta dipasang', 'Apa yang harus dilakukan kalau terlanjur klik', 'Ajak bagikan ke grup keluarga'],
+        caption: 'Undangan asli cukup dibaca, bukan di-install. Kalau ada file yang minta dipasang, stop dulu dan cek pengirimnya.' },
+      q3: { from: 'Rupiah Circulation', heat: 'Seasonal', q: 'Di mana bisa tukar uang baru untuk akhir tahun?',
+        ide: '“Mau Tukar Uang Baru? Cek Jalur Resminya”',
+        pesan: 'Layanan penukaran resmi tersedia; cek jadwal dan lokasinya di kanal resmi, dan hindari jasa tukar yang memotong nilai uang.',
+        audiens: 'Masyarakat umum; infografis jadwal dan unggahan story.',
+        tone: 'Ramah, informatif, langsung ke inti.',
+        visual: 'Peta lokasi dan kalender jadwal penukaran.',
+        titles: ['Mau Tukar Uang Baru? Cek Ini Dulu', 'Jalur Resmi Tukar Uang Akhir Tahun', 'Uang Baru Tanpa Potongan'],
+        alur: ['Kebutuhan: uang baru untuk angpao dan hadiah akhir tahun', 'Di mana menukar dan cara cek jadwalnya', 'Kenapa jasa tukar di pinggir jalan merugikan', 'Ingat: uang lama tetap sah dipakai'],
+        caption: 'Uang lama tetap sah. Kalau mau uang baru, pakai jalur resmi ya, biar nilainya utuh.' }
+    };
+    const questions = Object.keys(Q).map((id) => {
+      const q = Q[id];
+      const on = s.studioQ === id;
+      return { from: q.from, heat: q.heat, q: q.q, pressed: on, pick: () => this.setState({ studioQ: id }), style: gradCard(on, '16px') };
+    });
+    const b = Q[s.studioQ];
+    const brief = { q: b.q, ide: b.ide, pesan: b.pesan, audiens: b.audiens, tone: b.tone, visual: b.visual, caption: b.caption,
+      titles: b.titles.map((text) => ({ text })), alur: b.alur.map((text) => ({ text })) };
+    const momentum = [
+      ['Christmas & New Year holidays', 'Spending and cash demand rise. Prepare smart-shopping and official money-exchange content.'],
+      ['Monthly inflation release', 'Have a short explainer ready to use on release day.'],
+      ['Ramadan & Eid', 'Peak season for new banknotes and homecoming travel. Prepare education well ahead.'],
+      ['New school year', 'School costs go up; a good moment for family budgeting tips.']
+    ].map(([name, text]) => ({ name, text }));
+
+    return {
+      src: SRC,
+      kpis, tickerLoop,
+      goBayar: () => this.setState({ tab: 'bayar' }),
+      tabs,
+      tBerita: { tagStyle: tagStyle('berita') }, tInsight: { tagStyle: tagStyle('insight') },
+      tIde: { tagStyle: tagStyle('ide') }, tInspo: { tagStyle: tagStyle('inspirasi') },
+      isInflasi: s.tab === 'inflasi', isDunia: s.tab === 'dunia', isUmkm: s.tab === 'umkm',
+      isBayar: s.tab === 'bayar', isRupiah: s.tab === 'rupiah', isStudio: s.tab === 'studio',
+
+      comms, infRegions, inf, commodityName, ramaiInf, voiceInf, inspoInf,
+      pillNaik: pill('naik'), pillTurun: pill('turun'), pillStabil: pill('stabil'),
+      infMore: s.infMore, infMoreLabel: s.infMore ? 'Hide explanation' : 'Explain more',
+      toggleInfMore: () => this.setState({ infMore: !s.infMore }),
+
+      worldTabs, worldCats, worldRegions, worldToday, cbList, reads,
+      worldEmpty: worldToday.length === 0,
+      worldIsToday: s.worldTab === 'today', worldIsCb: s.worldTab === 'cb', worldIsReads: s.worldTab === 'reads',
+      regionLabel: s.worldRegion ? wName[s.worldRegion] : 'all regions',
+      hasRegionFilter: !!s.worldRegion,
+      clearRegion: () => this.setState({ worldRegion: null }),
+
+      umkmCats, um, umkmMore: s.umkmMore,
+      umkmMoreLabel: s.umkmMore ? 'Close' : 'Explain more',
+      toggleUmkmMore: () => this.setState({ umkmMore: !s.umkmMore }),
+
+      payScopes, payNews, payBars, innov, payQuote: P.quote, payInsight: P.insight,
+      payLang: s.payScope === 'id' ? 'id' : 'en',
+
+      rupLayers, rupRegions, rup,
+
+      questions, brief, momentum
+    };
+  }
+}
+  var comp = new Component({});
+  var cacheKey = null, cacheVal = null;
+  PetiteVue.createApp({
+    get V() {
+      var key = JSON.stringify(store.s);
+      if (key !== cacheKey) { cacheKey = key; cacheVal = comp.renderVals(); }
+      return cacheVal;
+    }
+  }).mount('#app');
+})();
+</script>
+</body>
+</html>
