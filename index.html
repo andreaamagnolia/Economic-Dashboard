@@ -70,7 +70,7 @@ button:focus-visible,a:focus-visible{outline:3px solid #A5B4FC;outline-offset:2p
 </div>
 </div>
 <div style="display: flex; flex-wrap: wrap; align-items: center; gap: 10px; font-size: 13px; color: #B4C0DA">
-<span>Wednesday, 18 November 2026</span>
+<span>{{ V.today }}</span>
 <span style="display: inline-flex; align-items: center; gap: 8px; padding: 6px 12px; border-radius: 999px; background: rgba(236,72,153,0.16); border: 1px solid rgba(244,114,182,0.5); color: #FBCFE8; font-weight: 700"><span style="width: 8px; height: 8px; border-radius: 50%; background: #F472B6; animation: blink 1.4s ease-in-out infinite"></span>LIVE · morning edition</span>
 </div>
 </header>
@@ -134,7 +134,7 @@ button:focus-visible,a:focus-visible{outline:3px solid #A5B4FC;outline-offset:2p
 </div>
 <div style="display: flex; justify-content: space-between; font-size: 11px; color: #8E9BBF"><span>0%</span><span>1.5%</span><span>3.28% (Sep)</span><span>3.5%</span><span>5%</span></div>
 </div>
-<span style="font-size: 11px; color: #8E9BBF">Key data: bi.go.id, checked 17 Nov 2026 at 23:30 WIB</span>
+<span style="font-size: 11px; color: #8E9BBF">Key data: bi.go.id, checked 19 Nov 2026 at 10:52 WIB</span>
 </div>
 </section>
 
@@ -802,22 +802,23 @@ class Component extends DCLogic {
     const pingStyle = (c, delay) => 'position:absolute;inset:0;border-radius:50%;background:' + c + ';animation:ping 1.8s ease-out infinite;animation-delay:' + delay + 's;';
     const dotStyleSolid = (c) => 'position:absolute;inset:0;border-radius:50%;background:' + c + ';box-shadow:0 0 10px ' + c + ';';
 
-    // ---------- Key data (bi.go.id, checked 17 Nov 2026) ----------
+    // ---------- Key data (bi.go.id, checked 19 Nov 2026 10:52 WIB) ----------
     const KPI = [
-      ['5.75%', 'BI-Rate', 'BI policy rate', '21 Oct 2026', '#3B82F6,#8B5CF6'],
+      ['6.00%', 'BI-Rate', 'BI policy rate · up 25 bps from 5.75%', '18 Nov 2026', '#3B82F6,#8B5CF6'],
       ['3.28%', 'CPI Inflation (yoy)', 'Price rise vs a year ago', 'Sep 2026', '#EC4899,#F59E0B'],
       ['2.5±1%', 'Inflation Target', 'This year’s inflation goal', '2026', '#14B8A6,#3B82F6'],
       ['$146,765M', 'FX Reserves', 'BI’s foreign currency holdings', '30 Oct 2026', '#8B5CF6,#EC4899'],
-      ['Rp18,264', 'JISDOR (USD-IDR)', 'Reference rupiah–dollar rate', '17 Nov 2026', '#22D3EE,#6366F1'],
-      ['5.10498%', 'INDONIA', 'Average overnight interbank lending rate', '17 Nov 2026', '#F59E0B,#EF4444']
+      ['Rp18,252', 'JISDOR (USD-IDR)', 'Reference rupiah–dollar rate', '18 Nov 2026', '#22D3EE,#6366F1'],
+      ['5.16352%', 'INDONIA', 'Average overnight interbank lending rate', '18 Nov 2026', '#F59E0B,#EF4444']
     ];
     const kpis = KPI.map(([value, label, hint, date, g]) => ({ value, label, hint, date,
       bar: 'position:absolute;left:0;right:0;top:0;height:3px;background:linear-gradient(90deg,' + g + ');' }));
     const TICK = [
-      ['BI-Rate', '5.75% (21 Oct 2026)', 'en'],
-      ['JISDOR', 'Rp18,264 per USD (17 Nov 2026)', 'en'],
+      ['BI-Rate', 'raised 25 bps to 6.00% (18 Nov 2026)', 'en'],
+      ['Facilities', 'Deposit Facility 5.25% · Lending Facility 6.75% (18 Nov 2026)', 'en'],
+      ['JISDOR', 'Rp18,252 per USD (18 Nov 2026)', 'en'],
       ['CPI inflation', '3.28% yoy (Sep 2026), within the 2.5±1% target', 'en'],
-      ['INDONIA', '5.10498% (17 Nov 2026)', 'en'],
+      ['INDONIA', '5.16352% (18 Nov 2026)', 'en'],
       ['FX reserves', 'USD146,765 million (30 Oct 2026)', 'en'],
       ['Payments', 'Kartu Kredit Indonesia kini diterbitkan 8 penyelenggara jasa pembayaran', 'id']
     ];
@@ -1241,6 +1242,7 @@ class Component extends DCLogic {
     return {
       src: SRC,
       kpis, tickerLoop, live, ai,
+      today: new Date(nNow).toLocaleDateString('en-GB', { weekday: 'long', day: 'numeric', month: 'long', year: 'numeric', timeZone: 'Asia/Jakarta' }),
       goBayar: () => this.setState({ tab: 'bayar' }),
       tabs,
       tBerita: { tagStyle: tagStyle('berita') }, tInsight: { tagStyle: tagStyle('insight') },

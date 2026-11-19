@@ -4,7 +4,7 @@ A personal, interactive economic newspaper for learning about central banking: s
 
 Six sections: Inflation · FX & World · MSMEs · Payment Systems · Rupiah Circulation · Communication Studio.
 
-- Key data tiles (BI-Rate, CPI inflation, inflation target, FX reserves, JISDOR, INDONIA) come from bi.go.id, checked 17 Nov 2026.
+- Key data tiles (BI-Rate, CPI inflation, inflation target, FX reserves, JISDOR, INDONIA) come from bi.go.id, checked 19 Nov 2026 (BI-Rate raised to 6.00% on 18 Nov 2026). They are updated by hand.
 - **AI Insight** above the news: a Gemini-written summary per topic, three times a day, with numbered links to its sources.
 - **Latest news** is live: stories (with photos) are pulled from Indonesian and world outlets every 15 minutes, stored in Supabase, and pushed to open pages in real time.
 - News inside the six sections is still illustrative sample content.
